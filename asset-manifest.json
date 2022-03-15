@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/need-for-drive/static/css/main.073c9b0a.css",
+    "main.js": "/need-for-drive/static/js/main.d725188d.js",
+    "static/js/787.859d4105.chunk.js": "/need-for-drive/static/js/787.859d4105.chunk.js",
+    "static/media/logo.svg": "/need-for-drive/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/need-for-drive/index.html",
+    "main.073c9b0a.css.map": "/need-for-drive/static/css/main.073c9b0a.css.map",
+    "main.d725188d.js.map": "/need-for-drive/static/js/main.d725188d.js.map",
+    "787.859d4105.chunk.js.map": "/need-for-drive/static/js/787.859d4105.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.d725188d.js"
+  ]
+}
