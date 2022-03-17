@@ -1,0 +1,80 @@
+@import "./variables.scss";
+
+/* Global */
+
+body {
+  margin: 0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $main-accent;
+  }
+
+  &:hover .img-link,
+  &:focus .img-link,
+  &:active .img-link {
+    color: $main-accent;
+  }
+}
+
+.img-link:hover path,
+.img-link:focus path,
+.img-link:active path {
+  fill: #0ec261;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: (0 0 0 0);
+  overflow: hidden;
+}
+
+.main-wrapper {
+  margin: 16px;
+
+  @media (min-width: $tablet-width) {
+    margin: 32px;
+  }
+}
+
+/* Button */
+.button {
+  padding: 5px;
+  min-width: 120px;
+  min-height: 48px;
+  border: 0;
+  color: $white;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
+  background-blend-mode: darken;
+  border-radius: 8px;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(90deg, #0b934a 2.61%, #026e47 112.6%);
+  }
+
+  &:active {
+    background: linear-gradient(90deg, #076432 2.61%, #013c27 112.6%);
+  }
+
+  &:disabled {
+    background: $gray-light;
+  }
+}
