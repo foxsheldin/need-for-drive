@@ -1,0 +1,127 @@
+@import "../../../scss/variables.scss";
+
+/* Slogan */
+
+.main-container__slogan {
+  margin-top: 60px;
+
+  @media (min-width: $tablet-width) {
+  }
+}
+
+.slogan__about-company {
+  margin: 0;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+
+  & .main-accent {
+    color: $main-accent;
+  }
+
+  @media (min-width: $tablet-width) {
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 66px;
+  }
+}
+
+.slogan__intro {
+  color: $gray;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+
+  @media (min-width: $tablet-width) {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+
+/* Action Button */
+
+.slogan__action {
+  margin-top: 32px;
+  border-radius: 0;
+  width: 100%;
+
+  @media (min-width: $tablet-width) {
+    width: 250px;
+    border-radius: 8px;
+    margin: 32px;
+  }
+}
+
+/* Footer */
+
+.main-container__footer {
+  margin-top: 173px;
+  color: $white;
+  background-color: #151b1f;
+
+  @media (min-width: $tablet-width) {
+    background-color: $white;
+    color: $gray;
+  }
+}
+
+.main-container__footer .main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (min-width: $tablet-width) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer__contact {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+
+  & a {
+    color: $main-accent;
+
+    &:hover,
+    &:focus {
+      color: $gray-light;
+    }
+
+    &:active {
+      color: $white;
+    }
+  }
+
+  @media (min-width: $tablet-width) {
+    order: 1;
+
+    & a {
+      color: $black;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $main-accent;
+      }
+    }
+  }
+}
+
+.footer__copyright {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+}
+
+/* Slider */
+
+.slider {
+  display: none;
+
+  @media (min-width: $desktop-min-width) {
+    display: block;
+    background-color: aqua;
+  }
+}
