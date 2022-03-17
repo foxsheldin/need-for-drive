@@ -105,7 +105,7 @@ const AsideMenu = ({ isOpen, onNavToggleClick, language, onLanguageClick }) => {
               </div>
               <button
                 type="button"
-                className="main-nav__language-toggle"
+                className="main-nav__language-toggle_mobile"
                 onClick={onLanguageClick}
               >
                 {language}
