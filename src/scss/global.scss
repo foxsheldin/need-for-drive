@@ -53,28 +53,82 @@ a {
 
 /* Button */
 .button {
-  padding: 5px;
-  min-width: 120px;
-  min-height: 48px;
-  border: 0;
-  color: $white;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
+  display: inline-block;
+  padding: 18px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: #0ec261;
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
   background-blend-mode: darken;
   border-radius: 8px;
+  min-width: 120px;
+  border: 0;
+  color: $white;
 
   &:hover,
   &:focus {
+    color: $white;
+    background: #0b934a;
     background: linear-gradient(90deg, #0b934a 2.61%, #026e47 112.6%);
   }
 
   &:active {
+    color: $white;
+    background: #076432;
     background: linear-gradient(90deg, #076432 2.61%, #013c27 112.6%);
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled {
     background: $gray-light;
+  }
+
+  &.button_blue {
+    background: #112644;
+    background: linear-gradient(90deg, #112644 0%, #0c7b67 100%);
+
+    &:hover,
+    &:focus {
+      background: #10223d;
+      background: linear-gradient(90deg, #10223d 2.61%, #0a6b59 112.6%);
+    }
+
+    &:active {
+      background: #0e1d35;
+      background: linear-gradient(90deg, #0e1d35 2.61%, #01301f 112.6%);
+    }
+  }
+
+  &.button_orange {
+    background: #493013;
+    background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+
+    &:hover,
+    &:focus {
+      background: #3a250f;
+      background: linear-gradient(90deg, #3a250f 2.61%, #6b0b33 112.6%);
+    }
+
+    &:active {
+      background: #2e1d0c;
+      background: linear-gradient(90deg, #2e1d0c 2.61%, #58092a 112.6%);
+    }
+  }
+
+  &.button_purple {
+    background: #281349;
+    background: linear-gradient(90deg, #281349 0%, #720c7b 100%);
+
+    &:hover,
+    &:focus {
+      background: #22103f;
+      background: linear-gradient(90deg, #22103f 2.61%, #5e0a66 112.6%);
+    }
+
+    &:active {
+      background: #1b0c31;
+      background: linear-gradient(90deg, #1b0c31 2.61%, #4d0853 112.6%);
+    }
   }
 }
