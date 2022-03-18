@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import TopMenuContainer from "../../common/TopMenu/TopMenuContainer";
+import SliderContent from "./Slider/SliderContent";
 
 const Content = (props) => {
   return (
@@ -30,7 +31,7 @@ const Content = (props) => {
           </div>
         </div>
       </main>
-      <section className="slider">slider</section>
+      <SliderContent />
     </>
   );
 };
