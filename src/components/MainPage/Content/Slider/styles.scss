@@ -11,7 +11,7 @@
   }
 
   @media (min-width: $desktop-width) {
-    width: 687px;
+    width: 688px;
   }
 }
 
@@ -47,7 +47,7 @@
   align-items: center;
 
   @media (min-width: $desktop-width) {
-    width: 687px;
+    width: 688px;
   }
 }
 
@@ -94,15 +94,24 @@
 
 .swiper-button-prev,
 .swiper-button-next {
+  margin-top: 0;
   color: $white;
   top: 0;
-  width: 40px;
+  width: 32px;
   height: 100%;
 
   &:hover,
   &:focus,
   &:active {
     background-color: rgba($main-accent, 0.2);
+  }
+
+  &::after {
+    font-size: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 64px;
   }
 }
 
