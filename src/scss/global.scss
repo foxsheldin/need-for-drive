@@ -44,10 +44,18 @@ a {
 }
 
 .main-wrapper {
-  margin: 16px;
+  margin: 0;
+  margin-left: 16px;
+  margin-right: 16px;
 
   @media (min-width: $tablet-width) {
-    margin: 32px;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-left: 64px;
+    margin-right: 64px;
   }
 }
 
