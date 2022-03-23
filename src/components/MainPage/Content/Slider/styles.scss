@@ -127,6 +127,11 @@
   left: auto;
 }
 
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 32px;
+}
+
 .swiper-pagination-bullet {
   background: $white;
 }
