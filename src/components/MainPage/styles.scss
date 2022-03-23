@@ -9,16 +9,6 @@
   }
 
   @media (min-width: $desktop-min-width) {
-    grid-template-columns: 64px 1fr 410px;
+    grid-template-columns: 64px 1fr;
   }
-
-  @media (min-width: $desktop-width) {
-    grid-template-columns: 64px 1fr 688px;
-  }
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }

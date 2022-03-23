@@ -16,6 +16,10 @@
     margin: 32px;
     justify-content: space-between;
   }
+
+  @media (min-width: $desktop-width) {
+    margin: 32px 64px;
+  }
 }
 
 .place__logo {

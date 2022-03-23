@@ -43,6 +43,39 @@ a {
   overflow: hidden;
 }
 
+/* Main */
+
+.main-container {
+  margin: 0;
+
+  .main-container__left-side_main-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .main-container__right-side_main-page {
+    height: 100%;
+  }
+
+  @media (min-width: $tablet-width) {
+    width: 682px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: $desktop-min-width) {
+    display: grid;
+    grid-template-columns: 1fr 410px;
+    width: 959px;
+  }
+  @media (min-width: $desktop-width) {
+    grid-template-columns: 1fr 688px;
+    width: 1376px;
+  }
+}
+
 .main-wrapper {
   margin: 0;
   margin-left: 16px;

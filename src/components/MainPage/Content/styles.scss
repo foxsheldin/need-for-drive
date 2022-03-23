@@ -2,13 +2,6 @@
 
 /* Slogan */
 
-.main-container__slogan {
-  margin-top: 60px;
-
-  @media (min-width: $tablet-width) {
-  }
-}
-
 .slogan__about-company {
   margin: 0;
   font-weight: 700;
@@ -48,14 +41,17 @@
   @media (min-width: $tablet-width) {
     width: 250px;
     border-radius: 8px;
-    margin: 32px;
+    margin-left: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-left: 64px;
   }
 }
 
 /* Footer */
 
 .main-container__footer {
-  margin-top: 173px;
   color: $white;
   background-color: #151b1f;
 
@@ -113,4 +109,20 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
+  margin-top: 0;
+}
+
+/* Slider */
+
+.slider-container {
+  display: none;
+
+  @media (min-width: $desktop-min-width) {
+    display: block;
+    width: 410px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 688px;
+  }
 }
