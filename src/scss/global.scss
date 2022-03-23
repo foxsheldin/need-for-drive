@@ -87,6 +87,22 @@ a {
     background: $gray-light;
   }
 
+  &.button_green {
+    background: #13493f;
+    background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
+
+    &:hover,
+    &:focus {
+      background: #12463c;
+      background: linear-gradient(90deg, #12463c 2.61%, #0b6d18 112.6%);
+    }
+
+    &:active {
+      background: #0f3a31;
+      background: linear-gradient(90deg, #0f3a31 2.61%, #095c14 112.6%);
+    }
+  }
+
   &.button_blue {
     background: #112644;
     background: linear-gradient(90deg, #112644 0%, #0c7b67 100%);

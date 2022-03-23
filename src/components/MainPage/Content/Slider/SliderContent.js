@@ -30,7 +30,7 @@ const SliderContent = () => {
                   местах, не нарушая ПДД, а также в аэропортах.
                 </div>
                 <div className="slider__action">
-                  <a href="#" className="button slider__button button_blue">
+                  <a href="#" className="button slider__button button_green">
                     Подробнее
                   </a>
                 </div>
