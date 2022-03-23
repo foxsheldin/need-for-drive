@@ -54,7 +54,7 @@ a {
 /* Button */
 .button {
   display: inline-block;
-  padding: 18px 20px;
+  padding: 13px 0;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -65,6 +65,9 @@ a {
   min-width: 120px;
   border: 0;
   color: $white;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
 
   &:hover,
   &:focus {
