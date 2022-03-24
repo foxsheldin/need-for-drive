@@ -60,17 +60,17 @@ a {
   }
 
   @media (min-width: $tablet-width) {
-    width: 682px;
-    margin-left: auto;
-    margin-right: auto;
+    min-width: 682px;
   }
 
   @media (min-width: $desktop-min-width) {
     display: grid;
     grid-template-columns: 1fr 410px;
-    width: 959px;
+    min-width: 959px;
   }
   @media (min-width: $desktop-width) {
+    margin-left: auto;
+    margin-right: auto;
     grid-template-columns: 1fr 688px;
     width: 1376px;
   }
