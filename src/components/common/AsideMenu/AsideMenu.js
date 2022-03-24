@@ -44,30 +44,28 @@ const AsideMenu = () => {
               <span className="visually-hidden">Закрыть меню</span>
             </button>
             <nav className="main-nav__list">
-              <div className="main-wrapper">
+              <a href="#" className="nav-link">
+                Парковка
+              </a>
+              <a href="#" className="nav-link">
+                Страховка
+              </a>
+              <a href="#" className="nav-link">
+                Бензин
+              </a>
+              <a href="#" className="nav-link">
+                Обслуживание
+              </a>
+              <div className="social-list">
                 <a href="#" className="nav-link">
-                  Парковка
+                  <TelegramIcon className="img-link" />
                 </a>
                 <a href="#" className="nav-link">
-                  Страховка
+                  <FacebookIcon className="img-link" />
                 </a>
                 <a href="#" className="nav-link">
-                  Бензин
+                  <InstagramIcon className="img-link" />
                 </a>
-                <a href="#" className="nav-link">
-                  Обслуживание
-                </a>
-                <div className="social-list">
-                  <a href="#" className="nav-link">
-                    <TelegramIcon className="img-link" />
-                  </a>
-                  <a href="#" className="nav-link">
-                    <FacebookIcon className="img-link" />
-                  </a>
-                  <a href="#" className="nav-link">
-                    <InstagramIcon className="img-link" />
-                  </a>
-                </div>
               </div>
               <button
                 type="button"
@@ -78,7 +76,7 @@ const AsideMenu = () => {
               </button>
             </nav>
           </div>
-          <div className="opened-menu__slider-blur"></div>
+          <div className="opened-menu__slider-blur" />
         </div>
       ) : null}
     </>
