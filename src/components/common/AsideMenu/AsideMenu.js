@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import "./styles.scss";
 import { ReactComponent as TelegramIcon } from "../../../assets/images/telegram.svg";
 import { ReactComponent as FacebookIcon } from "../../../assets/images/facebook.svg";
 import { ReactComponent as InstagramIcon } from "../../../assets/images/instagram.svg";
 
-const AsideMenu = ({ isOpen, onNavToggleClick, language, onLanguageClick }) => {
+const AsideMenu = () => {
+  const [isOpen, setOpen] = useState(false);
+  const [language, setLanguage] = useState("Eng");
+
+  const onNavToggleClick = () => {
+    setOpen(!isOpen);
+  };
+
+  const onLanguageClick = () => {
+    if (language === "Eng") setLanguage("Рус");
+    else setLanguage("Eng");
+  };
+
   return (
     <>
       <header className="main-header">
