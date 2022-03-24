@@ -10,17 +10,15 @@ const Content = () => {
         <div className="main-container__left-side_main-page">
           <TopMenu />
           <h1 className="visually-hidden">Каршеринг Need for drive</h1>
-          <div className="main-container__slogan">
-            <div className="main-wrapper">
-              <p className="slogan__about-company">
-                Каршеринг
-                <br />
-                <span className="main-accent">Need for drive</span>
-              </p>
-              <p className="slogan__intro">
-                Поминутная аренда авто твоего города
-              </p>
-            </div>
+          <div className="main-container__slogan slogan main-wrapper">
+            <p className="slogan__about-company ">
+              Каршеринг
+              <br />
+              <span className="main-accent">Need for drive</span>
+            </p>
+            <p className="slogan__intro">
+              Поминутная аренда авто твоего города
+            </p>
             <button className="button slogan__action">Забронировать</button>
           </div>
           <div className="main-container__footer">

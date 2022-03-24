@@ -34,18 +34,17 @@
 /* Action Button */
 
 .slogan__action {
+  margin-left: -16px;
+  margin-right: -16px;
   margin-top: 32px;
   border-radius: 0;
-  width: 100%;
+  width: 100vw;
 
   @media (min-width: $tablet-width) {
     width: 250px;
     border-radius: 8px;
-    margin-left: 32px;
-  }
-
-  @media (min-width: $desktop-width) {
-    margin-left: 64px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
