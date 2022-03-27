@@ -57,6 +57,7 @@
   @media (min-width: $tablet-width) {
     background-color: $white;
     color: $gray;
+    margin-bottom: 32px;
   }
 }
 
@@ -91,6 +92,7 @@
 
   @media (min-width: $tablet-width) {
     order: 1;
+    margin-bottom: 0;
 
     & a {
       color: $black;
@@ -109,6 +111,10 @@
   font-size: 13px;
   line-height: 15px;
   margin-top: 0;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 0;
+  }
 }
 
 /* Slider */
