@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles.scss";
+import { linksData } from "./constants";
 import { ReactComponent as TelegramIcon } from "../../../assets/images/telegram.svg";
 import { ReactComponent as FacebookIcon } from "../../../assets/images/facebook.svg";
 import { ReactComponent as InstagramIcon } from "../../../assets/images/instagram.svg";
@@ -16,6 +17,12 @@ const AsideMenu = () => {
     if (language === "Eng") setLanguage("Рус");
     else setLanguage("Eng");
   };
+
+  const navLinks = linksData.map((link, index) => (
+    <a href={link.linkTo} className="nav-link">
+      {link.name}
+    </a>
+  ));
 
   return (
     <>
@@ -44,18 +51,7 @@ const AsideMenu = () => {
               <span className="visually-hidden">Закрыть меню</span>
             </button>
             <nav className="main-nav__list">
-              <a href="#" className="nav-link">
-                Парковка
-              </a>
-              <a href="#" className="nav-link">
-                Страховка
-              </a>
-              <a href="#" className="nav-link">
-                Бензин
-              </a>
-              <a href="#" className="nav-link">
-                Обслуживание
-              </a>
+              {navLinks}
               <div className="social-list">
                 <a href="#" className="nav-link">
                   <TelegramIcon className="img-link" />
