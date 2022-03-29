@@ -17,6 +17,7 @@
 
   @media (min-width: $tablet-width) {
     display: flex;
+    position: fixed;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -95,11 +96,11 @@
 
   @media (min-width: $tablet-width) {
     display: block;
-    margin: 32px 18px;
+    margin: 18px 18px;
   }
 
   @media (min-width: $desktop-min-width) {
-    margin: 32px 8px;
+    margin: 18px 8px;
   }
 }
 
@@ -167,7 +168,7 @@
   }
 
   @media (min-width: $desktop-width) {
-    grid-template-columns: 1fr 688px;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
