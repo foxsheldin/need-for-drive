@@ -6,19 +6,25 @@
   position: absolute;
   top: 14px;
   right: 16px;
-  text-align: right;
 
   @media (min-width: $tablet-width) {
     position: relative;
     top: auto;
     right: auto;
-    display: flex;
     margin: 32px;
-    justify-content: space-between;
   }
 
   @media (min-width: $desktop-width) {
     margin: 32px 64px;
+  }
+}
+
+.place {
+  text-align: right;
+
+  @media (min-width: $tablet-width) {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -31,15 +37,6 @@
 
 .place__location {
   margin: 9px 0;
-}
-
-.location__image {
-  padding: 0 7px;
-  height: 18px;
-  width: 15px;
-}
-
-.location__name {
   position: relative;
   color: $gray;
   cursor: pointer;
