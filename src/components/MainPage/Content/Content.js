@@ -10,7 +10,7 @@ const Content = () => {
         <div className="main-container__left-side_main-page">
           <TopMenu />
           <h1 className="visually-hidden">Каршеринг Need for drive</h1>
-          <div className="main-container__slogan slogan main-wrapper">
+          <div className="slogan main-wrapper">
             <p className="slogan__about-company ">
               Каршеринг
               <br />
@@ -21,7 +21,7 @@ const Content = () => {
             </p>
             <button className="button slogan__action">Забронировать</button>
           </div>
-          <div className="main-container__footer">
+          <div className="main-container__footer footer">
             <div className="main-wrapper">
               <p className="footer__contact">
                 <a href="tel: +74952342244">8 (495) 234-22-44</a>
