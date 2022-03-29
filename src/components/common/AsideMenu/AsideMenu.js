@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./styles.scss";
 import { linksData } from "./constants";
 import { ReactComponent as TelegramIcon } from "../../../assets/images/telegram.svg";
-import { ReactComponent as FacebookIcon } from "../../../assets/images/facebook.svg";
-import { ReactComponent as InstagramIcon } from "../../../assets/images/instagram.svg";
 
 const AsideMenu = () => {
   const [isOpen, setOpen] = useState(false);
@@ -55,12 +53,6 @@ const AsideMenu = () => {
               <div className="social-list">
                 <a href="#" className="nav-link">
                   <TelegramIcon className="img-link" />
-                </a>
-                <a href="#" className="nav-link">
-                  <FacebookIcon className="img-link" />
-                </a>
-                <a href="#" className="nav-link">
-                  <InstagramIcon className="img-link" />
                 </a>
               </div>
               <button
