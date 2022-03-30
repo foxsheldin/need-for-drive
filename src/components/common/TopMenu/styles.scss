@@ -43,6 +43,8 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
+  width: max-content;
+  float: right;
 
   &::before {
     position: absolute;
