@@ -8,9 +8,9 @@ import "./styles.scss";
 import { slidesData } from "./constants";
 
 const SliderContent = () => {
-  const slides = slidesData.map((item) => {
+  const slides = slidesData.map((item, index) => {
     return (
-      <SwiperSlide>
+      <SwiperSlide key={index}>
         <div className={"slider__item " + item.bgStyles}>
           <div className="slider__discribe">
             <div className="slider__wrapper">

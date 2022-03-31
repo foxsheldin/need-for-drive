@@ -17,7 +17,7 @@ const AsideMenu = () => {
   };
 
   const navLinks = linksData.map((link, index) => (
-    <a href={link.linkTo} className="nav-link">
+    <a href={link.linkTo} className="nav-link" key={index}>
       {link.name}
     </a>
   ));
