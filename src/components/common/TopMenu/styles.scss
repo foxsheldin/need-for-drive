@@ -24,32 +24,32 @@
     display: flex;
     justify-content: space-between;
   }
-}
 
-.place__logo {
-  color: $main-accent;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
-}
+  .place__logo {
+    color: $main-accent;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+  }
 
-.place__location {
-  margin: 9px 0;
-  position: relative;
-  color: $gray;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  width: max-content;
-  float: right;
+  .place__location {
+    margin: 9px 0;
+    position: relative;
+    color: $gray;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    width: max-content;
+    float: right;
 
-  &::before {
-    position: absolute;
-    content: url("../../../assets/images/location.svg");
-    top: -3px;
-    left: -23px;
-    width: 15px;
-    height: 18px;
+    &::before {
+      position: absolute;
+      content: url("../../../assets/images/location.svg");
+      top: -3px;
+      left: -23px;
+      width: 15px;
+      height: 18px;
+    }
   }
 }
