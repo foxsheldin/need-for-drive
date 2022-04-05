@@ -1,0 +1,19 @@
+@import "../../scss/variables.scss";
+
+.order-page {
+  display: grid;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 80px 1fr;
+    height: 100vh;
+  }
+
+  @media (min-width: $desktop-min-width) {
+    grid-template-columns: 64px 1fr;
+  }
+}
+
+.order-content {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
