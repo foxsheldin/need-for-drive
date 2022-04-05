@@ -17,3 +17,39 @@
   display: grid;
   grid-template-rows: auto auto 1fr;
 }
+
+.order-container {
+  margin: 0;
+  margin-top: 15px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1376px;
+  }
+
+  .order-container__content {
+    height: 100%;
+
+    @media (min-width: $tablet-width) {
+      display: grid;
+      grid-template-columns: 1fr 2px 279px;
+    }
+
+    @media (min-width: $desktop-min-width) {
+      grid-template-columns: 1fr 2px 389px;
+    }
+
+    .content__vertical-line {
+      @media (min-width: $tablet-width) {
+        margin-top: -33px;
+        height: calc(100%+33px);
+        border-left: 1px solid $gray-light;
+      }
+    }
+  }
+}

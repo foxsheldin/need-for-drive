@@ -17,6 +17,13 @@ const OrderPage = () => {
             <Breadcrumbs />
           </div>
         </div>
+        <div className="order-container">
+          <div className="order-container__content content main-wrapper">
+            <div className="content__left-side"></div>
+            <div className="content__vertical-line" />
+            <div className="content__right-side"></div>
+          </div>
+        </div>
       </div>
     </div>
   );
