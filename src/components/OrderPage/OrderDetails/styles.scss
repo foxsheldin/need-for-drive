@@ -1,0 +1,69 @@
+@import '../../../scss/variables.scss';
+
+/* Order */
+
+.order {
+  margin-top: 20px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 0;
+    margin-left: 16px;
+  }
+
+  .order__header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: right;
+    color: $black;
+  }
+
+  .order__list {
+    margin-top: 26px;
+  }
+
+  .order__item {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $black;
+
+    .order__name-item {
+      max-width: 38%;
+    }
+
+    .order__dotted {
+      flex-grow: 1;
+      border-bottom: 1px dotted #000;
+      height: 1em;
+      margin: 0 0.4em;
+    }
+
+    .order__value-item {
+      text-align: end;
+      color: $gray;
+      max-width: 35%;
+    }
+  }
+
+  .order__price {
+    margin-top: 32px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+
+    .order__amount-money {
+      font-weight: 400;
+    }
+  }
+
+  .order__action {
+    margin-top: 32px;
+    width: 100%;
+  }
+}
+  
