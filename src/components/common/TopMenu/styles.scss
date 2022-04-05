@@ -1,0 +1,55 @@
+@import "../../../scss/variables.scss";
+
+/* Place */
+
+.main-container__place {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+
+  @media (min-width: $tablet-width) {
+    position: static;
+    margin: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin: 32px 64px;
+  }
+}
+
+.place {
+  text-align: right;
+
+  @media (min-width: $tablet-width) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .place__logo {
+    color: $main-accent;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+  }
+
+  .place__location {
+    margin: 9px 0;
+    position: relative;
+    color: $gray;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    width: max-content;
+    float: right;
+
+    &::before {
+      position: absolute;
+      content: url("../../../assets/images/location.svg");
+      top: -3px;
+      left: -23px;
+      width: 15px;
+      height: 18px;
+    }
+  }
+}
