@@ -1,0 +1,139 @@
+@import "../../../../scss/variables.scss";
+
+/* Slider */
+
+.slider__item {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.slide-1 {
+  background-image: url("../../../../assets/images/slide1.png");
+}
+
+.slide-2 {
+  background-image: url("../../../../assets/images/slide2.png");
+}
+
+.slide-3 {
+  background-image: url("../../../../assets/images/slide3.png");
+}
+
+.slide-4 {
+  background-image: url("../../../../assets/images/slide4.png");
+}
+
+.slider__discribe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+
+  display: flex;
+  align-items: center;
+
+  @media (min-width: $desktop-width) {
+    width: 100%;
+  }
+}
+
+.slider__wrapper {
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .slider__header {
+    color: $white;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .slider__info {
+    color: $gray-light;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 100%;
+    margin-top: 15px;
+  }
+
+  .slider__action {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 80%;
+    height: 260px;
+
+    .slider__header {
+      font-size: 40px;
+      line-height: 47px;
+    }
+
+    .slider__info {
+      font-size: 24px;
+      line-height: 90%;
+    }
+  }
+}
+
+.slider__button {
+  background-color: white;
+  width: 164px;
+}
+
+/* Custom Swiper */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  margin-top: 0;
+  color: $white;
+  top: 0;
+  width: 32px;
+  height: 100%;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgba($main-accent, 0.2);
+  }
+
+  &::after {
+    font-size: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 64px;
+  }
+}
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: 0;
+  right: auto;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 0;
+  left: auto;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 32px;
+}
+
+.swiper-pagination-bullet {
+  background: $white;
+}
+
+.swiper-pagination-bullet-active {
+  background: $main-accent;
+}

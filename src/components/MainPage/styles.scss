@@ -1,0 +1,14 @@
+@import "../../scss/variables.scss";
+
+.main-page {
+  display: grid;
+  height: 100vh;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 80px 1fr;
+  }
+
+  @media (min-width: $desktop-min-width) {
+    grid-template-columns: 64px 1fr;
+  }
+}
