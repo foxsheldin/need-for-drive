@@ -1,13 +1,17 @@
 import React, { useRef } from "react";
+import MapContent from "./Map/MapContent";
 import "./styles.scss";
 
 const PointSelection = ({
+  pointsData,
   cities,
   points,
   displayCities,
   displayPoints,
   setDisplayCities,
   setDisplayPoints,
+  selectCity,
+  selectPoint,
   searchCity,
   searchPoint,
   setCityOnClick,
@@ -99,6 +103,13 @@ const PointSelection = ({
       </div>
       <div className="content__map map">
         <div className="map__information">Выбрать на карте:</div>
+        <MapContent
+          setCity={setCityOnClick}
+          setPoint={setPointOnClick}
+          selectCity={selectCity}
+          selectPoint={selectPoint}
+          pointsData={pointsData}
+        />
       </div>
     </>
   );

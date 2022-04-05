@@ -9,6 +9,10 @@ const PointSelectionContainer = () => {
   const [points, setPoints] = useState(null);
   const [searchCity, setSearchCity] = useState("");
   const [searchPoint, setSearchPoint] = useState("");
+  const selectCity = citiesData.find((city) => city.name === searchCity);
+  const selectPoint = pointsData.find(
+    (point) => point.address === searchPoint && point.coordinates
+  );
 
   useEffect(() => {
     if (!searchCity) {
@@ -58,12 +62,16 @@ const PointSelectionContainer = () => {
 
   return (
     <PointSelection
+      citiesData={citiesData}
+      pointsData={pointsData}
       cities={cities}
       points={points}
       displayCities={displayCities}
       displayPoints={displayPoints}
       setDisplayCities={setDisplayCities}
       setDisplayPoints={setDisplayPoints}
+      selectCity={selectCity}
+      selectPoint={selectPoint}
       searchCity={searchCity}
       searchPoint={searchPoint}
       setCityOnClick={setCityOnClick}
