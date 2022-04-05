@@ -1,0 +1,50 @@
+@import "../../../scss/variables.scss";
+
+.breadcrumbs {
+  margin-top: 30px;
+  padding: 10px 0;
+  border: 1px solid $gray-light;
+  border-left-width: 0;
+  border-right-width: 0;
+
+  &.order-container {
+    margin-top: 0;
+  }
+  @media (min-width: $tablet-width) {
+    margin-bottom: 32px;
+  }
+
+  & .breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 38px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+
+    & .breadcrumbs__item {
+      position: relative;
+      color: $black;
+
+      &:not(:last-child)::after {
+        position: absolute;
+        content: url("../../../assets/images/breadcrumb.svg");
+        right: -23px;
+      }
+
+      &.breadcrumbs__item_active {
+        pointer-events: none;
+        color: $main-accent;
+      }
+
+      &.breadcrumbs__item_disabled {
+        pointer-events: none;
+      }
+
+      &:disabled {
+        color: $gray;
+      }
+    }
+  }
+}
