@@ -8,14 +8,14 @@ const PointSelection = ({
   points,
   displayCities,
   displayPoints,
-  setDisplayCities,
-  setDisplayPoints,
   selectCity,
   selectPoint,
   searchCity,
   searchPoint,
   setCityOnClick,
   setPointOnClick,
+  handleClickCities,
+  handleClickPoints,
   handleChangeCities,
   handleChangeAddresses,
   handleKeyDownCity,
@@ -40,7 +40,7 @@ const PointSelection = ({
               className="input"
               placeholder="Начните вводить город..."
               value={searchCity}
-              onClick={() => setDisplayCities(!displayCities)}
+              onClick={handleClickCities}
               onChange={handleChangeCities}
             />
             {displayCities && (
@@ -77,7 +77,7 @@ const PointSelection = ({
                 points?.length > 0 ? "Начните вводить пункт..." : "Нет адресов"
               }
               value={searchPoint}
-              onClick={() => setDisplayPoints(!displayPoints)}
+              onClick={handleClickPoints}
               onChange={handleChangeAddresses}
               disabled={!points && true}
             />

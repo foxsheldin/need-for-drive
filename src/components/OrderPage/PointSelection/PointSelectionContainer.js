@@ -33,15 +33,23 @@ const PointSelectionContainer = () => {
     setDisplayPoints(false);
   };
 
+  const handleClickCities = () => {
+    setDisplayPoints(false);
+    setDisplayCities(!displayCities);
+  };
+
+  const handleClickPoints = () => {
+    setDisplayCities(false);
+    setDisplayPoints(!displayPoints);
+  };
+
   const handleChangeCities = (evt) => {
     setDisplayCities(true);
-    setDisplayPoints(false);
     const regExpValue = new RegExp(evt.target.value, "i");
     setCities(citiesData.filter((city) => city.name.match(regExpValue)));
     setSearchCity(evt.target.value);
   };
   const handleChangeAddresses = (evt) => {
-    setDisplayCities(false);
     setDisplayPoints(true);
     const regExpValue = new RegExp(evt.target.value, "i");
     setPoints(
@@ -68,8 +76,8 @@ const PointSelectionContainer = () => {
       points={points}
       displayCities={displayCities}
       displayPoints={displayPoints}
-      setDisplayCities={setDisplayCities}
-      setDisplayPoints={setDisplayPoints}
+      handleClickCities={handleClickCities}
+      handleClickPoints={handleClickPoints}
       selectCity={selectCity}
       selectPoint={selectPoint}
       searchCity={searchCity}
