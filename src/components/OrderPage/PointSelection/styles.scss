@@ -1,0 +1,119 @@
+@import "../../../scss/variables.scss";
+
+/* Point */
+
+.content__point {
+  width: 280px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  color: $black;
+
+  @media (min-width: $tablet-width) {
+    width: 325px;
+  }
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 16px;
+
+  .point__city,
+  .point__address {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .label {
+      margin-right: 5px;
+    }
+
+    .input[type="search"] {
+      height: 20px;
+      border: 0;
+      border-bottom: 1px solid $gray;
+      background: $white;
+      color: $black;
+
+      &:focus {
+        outline: 0;
+        border: 0;
+        border-bottom: 1px solid $black;
+
+        &::-webkit-search-cancel-button {
+          opacity: 1;
+        }
+      }
+
+      @media (min-width: $tablet-width) {
+        width: 224px;
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 8px;
+        width: 8px;
+        background: url("../../../assets/images/cancel.svg") no-repeat 50% 50%;
+        background-size: contain;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+/* Autocomplete */
+
+.autocomplete {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 106px;
+  width: 171px;
+  background-color: $white;
+  border: 1px solid $gray-light;
+  z-index: 3;
+  overflow-y: auto;
+
+  .autocomplete__item {
+    padding: 8px;
+
+    &:hover {
+      color: $main-accent;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: $white;
+    border-left: 1px solid $gray-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 2px;
+    background-color: $gray;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  @media (min-width: $tablet-width) {
+    width: 222px;
+  }
+}
+
+/* Map */
+
+.content__map {
+  margin-top: 48px;
+  width: 100%;
+}
+
+.map .map__information {
+  color: $black;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 16px;
+}
