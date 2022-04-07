@@ -21,7 +21,7 @@ const OrderDetails = ({
 }) => {
   return (
     <div className="content__order order">
-      {selectedPoint && (
+      {selectedCity && selectedPoint && (
         <>
           <div className="order__header">Ваш заказ:</div>
           <OrderItem
