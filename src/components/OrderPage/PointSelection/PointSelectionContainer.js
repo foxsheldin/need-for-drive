@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import PointSelection from "./PointSelection";
-import { connect } from "react-redux";
 import {
   getCities,
   getPoints,
   setSelectedCity,
   setSelectedPoint,
-} from "../../../redux/order-reducer";
+} from "../../../redux/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import PointSelection from "./PointSelection";
 
-const PointSelectionContainer = ({
-  citiesData,
-  pointsData,
-  getCities,
-  getPoints,
-  setSelectedCity,
-  selectedCity,
-  setSelectedPoint,
-  selectedPoint,
-}) => {
+const PointSelectionContainer = () => {
+  const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
+    (state) => state.order
+  );
+  const dispatch = useDispatch();
   const [displayCities, setDisplayCities] = useState(false);
   const [displayPoints, setDisplayPoints] = useState(false);
   const [searchCities, setSearchCities] = useState(citiesData);
@@ -26,9 +21,9 @@ const PointSelectionContainer = ({
   const [searchPoint, setSearchPoint] = useState(selectedPoint?.address ?? "");
 
   useEffect(() => {
-    getCities();
-    getPoints();
-  }, []);
+    dispatch(getCities());
+    dispatch(getPoints());
+  }, [dispatch]);
 
   useEffect(() => {
     setSearchCities(citiesData);
@@ -38,8 +33,8 @@ const PointSelectionContainer = ({
     if (!selectedCity || !searchCity) {
       setDisplayPoints(false);
       setSearchPoint("");
-      setSelectedCity(null);
-      setSelectedPoint(null);
+      dispatch(setSelectedCity(null));
+      dispatch(setSelectedPoint(null));
       setSearchPoints(null);
     } else {
       setSearchPoints(
@@ -50,13 +45,13 @@ const PointSelectionContainer = ({
 
   useEffect(() => {
     if (!searchPoint) {
-      setSelectedPoint(null);
+      dispatch(setSelectedPoint(null));
       setSearchPoints(null);
     }
   }, [searchPoint]);
 
   const handleSetCity = (city) => {
-    setSelectedCity(city);
+    dispatch(setSelectedCity(city));
     setSearchCity(city.name);
     setDisplayCities(false);
     setSearchPoints(
@@ -66,7 +61,7 @@ const PointSelectionContainer = ({
 
   const handleSetPoint = (point) => {
     setSearchPoint(point.address);
-    setSelectedPoint(point);
+    dispatch(setSelectedPoint(point));
     setDisplayPoints(false);
   };
 
@@ -129,16 +124,4 @@ const PointSelectionContainer = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  citiesData: state.order.cities,
-  pointsData: state.order.points,
-  selectedCity: state.order.selectedCity,
-  selectedPoint: state.order.selectedPoint,
-});
-
-export default connect(mapStateToProps, {
-  getCities,
-  getPoints,
-  setSelectedCity,
-  setSelectedPoint,
-})(PointSelectionContainer);
+export default PointSelectionContainer;

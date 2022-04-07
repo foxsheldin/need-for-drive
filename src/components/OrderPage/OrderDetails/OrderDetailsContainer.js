@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
 import OrderDetails from "./OrderDetails";
 
-const OrderDetailsContainer = ({ selectedCity, selectedPoint }) => {
+const OrderDetailsContainer = () => {
+  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
   const { stepOrder } = useParams();
   const [buttonAction, setButtonAction] = useState({
     name: "",
@@ -45,9 +46,4 @@ const OrderDetailsContainer = ({ selectedCity, selectedPoint }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  selectedCity: state.order.selectedCity,
-  selectedPoint: state.order.selectedPoint,
-});
-
-export default connect(mapStateToProps)(OrderDetailsContainer);
+export default OrderDetailsContainer;
