@@ -127,6 +127,7 @@ a {
 
   &:disabled,
   &.disabled {
+    pointer-events: none;
     background: $gray-light;
   }
 
