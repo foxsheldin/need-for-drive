@@ -40,6 +40,7 @@
 
       &.breadcrumbs__item_disabled {
         pointer-events: none;
+        color: $gray;
       }
 
       &:disabled {

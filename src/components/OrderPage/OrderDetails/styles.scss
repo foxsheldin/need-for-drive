@@ -1,4 +1,4 @@
-@import '../../../scss/variables.scss';
+@import "../../../scss/variables.scss";
 
 /* Order */
 
@@ -10,7 +10,7 @@
     margin-left: 16px;
   }
 
-  .order__header {
+  & .order__header {
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
@@ -18,11 +18,11 @@
     color: $black;
   }
 
-  .order__list {
+  & .order__list {
     margin-top: 26px;
   }
 
-  .order__item {
+  & .order__item {
     display: flex;
     margin-top: 16px;
     justify-content: space-between;
@@ -32,38 +32,37 @@
     line-height: 16px;
     color: $black;
 
-    .order__name-item {
+    & .order__name-item {
       max-width: 38%;
     }
 
-    .order__dotted {
+    & .order__dotted {
       flex-grow: 1;
       border-bottom: 1px dotted #000;
       height: 1em;
       margin: 0 0.4em;
     }
 
-    .order__value-item {
+    & .order__value-item {
       text-align: end;
       color: $gray;
-      max-width: 35%;
+      max-width: max-content;
     }
   }
 
-  .order__price {
+  & .order__price {
     margin-top: 32px;
     font-weight: 500;
     font-size: 16px;
     line-height: 16px;
 
-    .order__amount-money {
+    & .order__amount-money {
       font-weight: 400;
     }
   }
 
-  .order__action {
+  & .order__action {
     margin-top: 32px;
     width: 100%;
   }
 }
-  
