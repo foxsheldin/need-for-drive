@@ -35,7 +35,7 @@ const PointSelectionContainer = ({
   }, [citiesData]);
 
   useEffect(() => {
-    if (!selectedCity) {
+    if (!selectedCity || !searchCity) {
       setDisplayPoints(false);
       setSearchPoint("");
       setSelectedCity(null);
@@ -46,7 +46,7 @@ const PointSelectionContainer = ({
         pointsData.filter((point) => point.cityId?.name === selectedCity.name)
       );
     }
-  }, [selectedCity]);
+  }, [selectedCity, searchCity]);
 
   useEffect(() => {
     if (!searchPoint) {
