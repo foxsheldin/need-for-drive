@@ -41,7 +41,7 @@ const Breadcrumbs = () => {
       setStepsBreadcrumbs(newStepData);
     }
   }, [selectedCity, selectedPoint]);
-  console.log(stepsBreadcrumbs);
+
   return (
     <div className="breadcrumbs__list main-wrapper">
       {stepsBreadcrumbs.map((step) => {
