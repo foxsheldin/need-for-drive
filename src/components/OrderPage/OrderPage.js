@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AsideMenu from "../common/AsideMenu/AsideMenu";
 import TopMenu from "../common/TopMenu/TopMenu";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
+import ModelSelection from "./ModelSelection/ModelSelection";
 import OrderDetailsContainer from "./OrderDetails/OrderDetailsContainer";
 import PointSelectionContainer from "./PointSelection/PointSelectionContainer";
 import "./styles.scss";
@@ -11,9 +12,14 @@ import "./styles.scss";
 const OrderPage = () => {
   const { stepOrder } = useParams();
   const { stateError } = useSelector((state) => state.order);
+  const [currentStep, setCurrentStep] = useState(stepOrder);
+
+  useEffect(() => {
+    setCurrentStep(stepOrder);
+  }, [stepOrder]);
 
   const getCurrentStepContent = () => {
-    switch (stepOrder) {
+    switch (currentStep) {
       case "point":
         return <PointSelectionContainer />;
       default:
