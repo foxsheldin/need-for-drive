@@ -1,35 +1,72 @@
 import React, { useEffect, useState } from "react";
 import PointSelection from "./PointSelection";
-import { citiesData, pointsData } from "./constants";
+import { connect } from "react-redux";
+import {
+  getCities,
+  getPoints,
+  setSelectedCity,
+  setSelectedPoint,
+} from "../../../redux/order-reducer";
 
-const PointSelectionContainer = () => {
+const PointSelectionContainer = ({
+  citiesData,
+  pointsData,
+  getCities,
+  getPoints,
+  setSelectedCity,
+  selectedCity,
+  setSelectedPoint,
+  selectedPoint,
+}) => {
   const [displayCities, setDisplayCities] = useState(false);
   const [displayPoints, setDisplayPoints] = useState(false);
-  const [cities, setCities] = useState(citiesData);
-  const [points, setPoints] = useState(null);
-  const [searchCity, setSearchCity] = useState("");
-  const [searchPoint, setSearchPoint] = useState("");
-  const selectCity = citiesData.find((city) => city.name === searchCity);
-  const selectPoint = pointsData.find(
-    (point) => point.address === searchPoint && point.coordinates
-  );
+  const [searchCities, setSearchCities] = useState(citiesData);
+  const [searchPoints, setSearchPoints] = useState(null);
+  const [searchCity, setSearchCity] = useState(selectedCity?.name ?? "");
+  const [searchPoint, setSearchPoint] = useState(selectedPoint?.address ?? "");
 
   useEffect(() => {
-    if (!searchCity) {
+    getCities();
+    getPoints();
+  }, []);
+
+  useEffect(() => {
+    setSearchCities(citiesData);
+  }, [citiesData]);
+
+  useEffect(() => {
+    if (!selectedCity) {
       setDisplayPoints(false);
       setSearchPoint("");
-      setPoints(null);
+      setSelectedCity(null);
+      setSelectedPoint(null);
+      setSearchPoints(null);
+    } else {
+      setSearchPoints(
+        pointsData.filter((point) => point.cityId?.name === selectedCity.name)
+      );
     }
-  }, [searchCity]);
+  }, [selectedCity]);
 
-  const setCityOnClick = (city) => {
-    setSearchCity(city);
+  useEffect(() => {
+    if (!searchPoint) {
+      setSelectedPoint(null);
+      setSearchPoints(null);
+    }
+  }, [searchPoint]);
+
+  const handleSetCity = (city) => {
+    setSelectedCity(city);
+    setSearchCity(city.name);
     setDisplayCities(false);
-    setPoints(pointsData.filter((point) => point.cityId?.name === city));
+    setSearchPoints(
+      pointsData.filter((point) => point.cityId?.name === city.name)
+    );
   };
 
-  const setPointOnClick = (point) => {
-    setSearchPoint(point);
+  const handleSetPoint = (point) => {
+    setSearchPoint(point.address);
+    setSelectedPoint(point);
     setDisplayPoints(false);
   };
 
@@ -46,13 +83,13 @@ const PointSelectionContainer = () => {
   const handleChangeCities = (evt) => {
     setDisplayCities(true);
     const regExpValue = new RegExp(evt.target.value, "i");
-    setCities(citiesData.filter((city) => city.name.match(regExpValue)));
+    setSearchCities(citiesData?.filter((city) => city.name.match(regExpValue)));
     setSearchCity(evt.target.value);
   };
   const handleChangeAddresses = (evt) => {
     setDisplayPoints(true);
     const regExpValue = new RegExp(evt.target.value, "i");
-    setPoints(
+    setSearchPoints(
       pointsData
         .filter((point) => point.cityId?.name === searchCity)
         .filter(
@@ -62,28 +99,28 @@ const PointSelectionContainer = () => {
     setSearchPoint(evt.target.value);
   };
   const handleKeyDownCity = (evt, city) => {
-    if (evt.code == "Enter") setCityOnClick(city.name);
+    if (evt.code == "Enter") handleSetCity(city);
   };
   const handleKeyDownAddress = (evt, point) => {
-    if (evt.code == "Enter") setPointOnClick(point.address);
+    if (evt.code == "Enter") handleSetPoint(point);
   };
 
   return (
     <PointSelection
       citiesData={citiesData}
       pointsData={pointsData}
-      cities={cities}
-      points={points}
+      searchCities={searchCities}
+      searchPoints={searchPoints}
       displayCities={displayCities}
       displayPoints={displayPoints}
       handleClickCities={handleClickCities}
       handleClickPoints={handleClickPoints}
-      selectCity={selectCity}
-      selectPoint={selectPoint}
+      selectedCity={selectedCity}
+      selectedPoint={selectedPoint}
       searchCity={searchCity}
       searchPoint={searchPoint}
-      setCityOnClick={setCityOnClick}
-      setPointOnClick={setPointOnClick}
+      handleSetCity={handleSetCity}
+      handleSetPoint={handleSetPoint}
       handleChangeCities={handleChangeCities}
       handleChangeAddresses={handleChangeAddresses}
       handleKeyDownCity={handleKeyDownCity}
@@ -92,4 +129,16 @@ const PointSelectionContainer = () => {
   );
 };
 
-export default PointSelectionContainer;
+const mapStateToProps = (state) => ({
+  citiesData: state.order.cities,
+  pointsData: state.order.points,
+  selectedCity: state.order.selectedCity,
+  selectedPoint: state.order.selectedPoint,
+});
+
+export default connect(mapStateToProps, {
+  getCities,
+  getPoints,
+  setSelectedCity,
+  setSelectedPoint,
+})(PointSelectionContainer);

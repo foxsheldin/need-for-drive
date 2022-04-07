@@ -10,75 +10,76 @@ import {
 } from "react-yandex-maps";
 
 const MapContent = ({
-  setCity,
-  setPoint,
-  selectCity,
-  selectPoint,
+  handleSetCity,
+  handleSetPoint,
+  selectedCity,
+  selectedPoint,
+  citiesData,
   pointsData,
 }) => {
-  const [selectedPoint, setSelectedPoint] = useState([54.337458, 48.382399]);
+  const [centerMap, setCenterMap] = useState([54.337458, 48.382399]);
   const [pointZoom, setPointZoom] = useState(9.5);
+  const [mapPoints, setMapPoints] = useState(pointsData);
   const mapRef = useRef();
 
   useEffect(() => {
-    if (selectCity) {
-      const coordinates = selectCity.coordinates;
-      onSelectPoint(coordinates, 9.5);
-    }
-  }, [selectCity]);
+    setMapPoints(pointsData);
+  }, [pointsData]);
 
   useEffect(() => {
-    if (selectPoint) onSelectPoint(selectPoint.coordinates, 15);
-  }, [selectPoint]);
+    if (selectedCity) {
+      const coordinates = selectedCity.coordinates;
+      onSelectPoint(coordinates, 9.5);
+    }
+  }, [selectedCity]);
 
-  const handleClickPlacemark = (point) => {
-    setCity(point.cityId.name);
-    setPoint(point.address);
-    onSelectPoint(point.coordinates, 15.5);
+  useEffect(() => {
+    if (selectedPoint) onSelectPoint(selectedPoint.coordinates, 15);
+  }, [selectedPoint]);
+
+  const handleClickPlacemark = async (point) => {
+    const cityData = citiesData.find((city) => city.name === point.cityId.name);
+    await handleSetCity(cityData);
+    await handleSetPoint(point);
   };
 
   const onSelectPoint = async (center, zoom) => {
-    await mapRef.current.panTo(center, {
+    await mapRef.current?.panTo(center, {
       flying: false,
     });
-    await setSelectedPoint(center);
-    await setSelectedPoint(null);
+    await setCenterMap(center);
     await setPointZoom(zoom);
-    await setPointZoom(null);
   };
 
   const pins = useMemo(
     () =>
-      pointsData
+      mapPoints
         .filter((point) => point.coordinates)
-        .map((point) => (
-          <Placemark
-            key={point.coordinates}
-            geometry={point.coordinates}
-            options={{
-              iconLayout: "default#image",
-              iconImageHref: placemarkIcon,
-              iconImageSize: [18, 18],
-              iconImageOffset: [-9, -9],
-            }}
-            onClick={() => handleClickPlacemark(point)}
-          />
-        )),
-    []
+        .map((point) => {
+          return (
+            <Placemark
+              key={point.coordinates}
+              geometry={point.coordinates}
+              options={{
+                iconLayout: "default#image",
+                iconImageHref: placemarkIcon,
+                iconImageSize: [18, 18],
+                iconImageOffset: [-9, -9],
+              }}
+              onClick={() => handleClickPlacemark(point)}
+            />
+          );
+        }),
+    [mapPoints]
   );
 
   return (
     <div className="map__config">
-      <YMaps
-        query={{
-          lang: "ru_RU",
-          apikey: process.env.REACT_APP_YANDEX_API_KEY,
-        }}
-      >
+      <YMaps>
         <Map
           instanceRef={mapRef}
           state={{
-            center: selectedPoint,
+            center: centerMap,
             zoom: pointZoom,
           }}
           width={"100%"}

@@ -3,17 +3,18 @@ import MapContent from "./Map/MapContent";
 import "./styles.scss";
 
 const PointSelection = ({
+  citiesData,
   pointsData,
-  cities,
-  points,
+  searchCities,
+  searchPoints,
   displayCities,
   displayPoints,
-  selectCity,
-  selectPoint,
+  selectedCity,
+  selectedPoint,
   searchCity,
   searchPoint,
-  setCityOnClick,
-  setPointOnClick,
+  handleSetCity,
+  handleSetPoint,
   handleClickCities,
   handleClickPoints,
   handleChangeCities,
@@ -45,11 +46,11 @@ const PointSelection = ({
             />
             {displayCities && (
               <div className="autocomplete">
-                {cities.map((city, index) => {
+                {searchCities.map((city, index) => {
                   return (
                     <div
                       className="autocomplete__item"
-                      onClick={() => setCityOnClick(city.name)}
+                      onClick={() => handleSetCity(city)}
                       key={index}
                       tabIndex="0"
                       onKeyDown={(evt) => handleKeyDownCity(evt, city)}
@@ -74,20 +75,22 @@ const PointSelection = ({
               id="address"
               className="input"
               placeholder={
-                points?.length > 0 ? "Начните вводить пункт..." : "Нет адресов"
+                searchPoints?.length > 0
+                  ? "Начните вводить пункт..."
+                  : "Нет адресов"
               }
               value={searchPoint}
               onClick={handleClickPoints}
               onChange={handleChangeAddresses}
-              disabled={!points && true}
+              disabled={!searchPoints && true}
             />
             {displayPoints && (
               <div className="autocomplete">
-                {points.map((point, index) => {
+                {searchPoints?.map((point, index) => {
                   return (
                     <div
                       className="autocomplete__item"
-                      onClick={() => setPointOnClick(point.address)}
+                      onClick={() => handleSetPoint(point)}
                       onKeyDown={(evt) => handleKeyDownAddress(evt, point)}
                       key={index}
                       tabIndex="0"
@@ -104,10 +107,11 @@ const PointSelection = ({
       <div className="content__map map">
         <div className="map__information">Выбрать на карте:</div>
         <MapContent
-          setCity={setCityOnClick}
-          setPoint={setPointOnClick}
-          selectCity={selectCity}
-          selectPoint={selectPoint}
+          handleSetCity={handleSetCity}
+          handleSetPoint={handleSetPoint}
+          selectedCity={selectedCity}
+          selectedPoint={selectedPoint}
+          citiesData={citiesData}
           pointsData={pointsData}
         />
       </div>
