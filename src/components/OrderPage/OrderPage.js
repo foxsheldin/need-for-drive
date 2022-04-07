@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import AsideMenu from "../common/AsideMenu/AsideMenu";
 import TopMenu from "../common/TopMenu/TopMenu";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
-import OrderDetails from "./OrderDetails/OrderDetails";
+import OrderDetailsContainer from "./OrderDetails/OrderDetailsContainer";
 import PointSelectionContainer from "./PointSelection/PointSelectionContainer";
 import "./styles.scss";
 
@@ -36,7 +36,7 @@ const OrderPage = () => {
             <div className="content__left-side">{getCurrentStepContent()}</div>
             <div className="content__vertical-line" />
             <div className="content__right-side">
-              <OrderDetails />
+              <OrderDetailsContainer />
             </div>
           </div>
         </div>
