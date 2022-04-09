@@ -13,7 +13,7 @@
   z-index: 3;
   overflow-y: auto;
 
-  .autocomplete__item {
+  &__item {
     padding: 8px;
 
     &:hover {

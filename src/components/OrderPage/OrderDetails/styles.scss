@@ -10,7 +10,7 @@
     margin-left: 16px;
   }
 
-  & .order__header {
+  &__header {
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
@@ -18,11 +18,11 @@
     color: $black;
   }
 
-  & .order__list {
+  &__list {
     margin-top: 26px;
   }
 
-  & .order__item {
+  .order__item {
     display: flex;
     margin-top: 16px;
     justify-content: space-between;
@@ -50,7 +50,7 @@
     }
   }
 
-  & .order__price {
+  &__price {
     margin-top: 32px;
     font-weight: 500;
     font-size: 16px;
@@ -61,7 +61,7 @@
     }
   }
 
-  & .order__action {
+  &__action {
     margin-top: 32px;
     width: 100%;
   }
