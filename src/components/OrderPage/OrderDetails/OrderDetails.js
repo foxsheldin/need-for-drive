@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import "./styles.scss";
 
 const OrderItem = ({ name, value }) => {
@@ -12,13 +13,38 @@ const OrderItem = ({ name, value }) => {
   );
 };
 
-const OrderDetails = ({
-  selectedCity,
-  selectedPoint,
-  price,
-  buttonAction,
-  buttonDisabled,
-}) => {
+const OrderDetails = () => {
+  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
+  const { stepOrder } = useParams();
+  const [buttonAction, setButtonAction] = useState({
+    name: "",
+    linkTo: "link",
+  });
+  const [price, setPrice] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    if (selectedCity && selectedPoint) setButtonDisabled(false);
+    else setButtonDisabled(true);
+  }, [selectedCity, selectedPoint]);
+
+  useEffect(() => {
+    switch (stepOrder) {
+      case "point":
+        setButtonAction({
+          name: "Выбрать модель",
+          linkTo: "/order/model",
+        });
+        break;
+      case "model":
+        setButtonAction({
+          name: "Дополнительно",
+          linkTo: "/order/additionally",
+        });
+        break;
+    }
+  }, [stepOrder]);
+
   return (
     <div className="content__order order">
       {selectedCity && selectedPoint && (
