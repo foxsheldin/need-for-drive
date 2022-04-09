@@ -1,29 +1,118 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getCities,
+  getPoints,
+  setSelectedCity,
+  setSelectedPoint,
+} from "../../../redux/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
 import MapContent from "./Map/MapContent";
 import "./styles.scss";
+import Autocomplete from "../../common/Autocomplete/Autocomplete";
 
-const PointSelection = ({
-  citiesData,
-  pointsData,
-  searchCities,
-  searchPoints,
-  displayCities,
-  displayPoints,
-  selectedCity,
-  selectedPoint,
-  searchCity,
-  searchPoint,
-  handleSetCity,
-  handleSetPoint,
-  handleClickCities,
-  handleClickPoints,
-  handleChangeCities,
-  handleChangeAddresses,
-  handleKeyDownCity,
-  handleKeyDownAddress,
-}) => {
-  const citiesInputRef = useRef(null);
-  const pointsInputRef = useRef(null);
+const PointSelection = () => {
+  const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
+    (state) => state.order
+  );
+  const dispatch = useDispatch();
+  const [displayCities, setDisplayCities] = useState(false);
+  const [displayPoints, setDisplayPoints] = useState(false);
+  const [searchCities, setSearchCities] = useState(citiesData);
+  const [searchPoints, setSearchPoints] = useState(null);
+  const [searchCity, setSearchCity] = useState(selectedCity?.name ?? "");
+  const [searchPoint, setSearchPoint] = useState(selectedPoint?.address ?? "");
+
+  useEffect(() => {
+    dispatch(getCities());
+    dispatch(getPoints());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setSearchCities(citiesData);
+  }, [citiesData]);
+
+  useEffect(() => {
+    if (!selectedCity || !searchCity) {
+      setSearchPoints(null);
+      setSearchPoint("");
+      dispatch(setSelectedCity(null));
+      dispatch(setSelectedPoint(null));
+    }
+  }, [selectedCity, searchCity]);
+
+  useEffect(() => {
+    if (!searchPoint) {
+      dispatch(setSelectedPoint(null));
+    }
+  }, [searchPoint]);
+
+  const handleSetCity = (city) => {
+    dispatch(setSelectedCity(city));
+    setSearchCity(city.name);
+    setDisplayCities(false);
+    setSearchPoints(
+      pointsData.filter((point) => point.cityId?.name === city.name)
+    );
+  };
+
+  const handleSetPoint = (point) => {
+    setSearchPoint(point.address);
+    dispatch(setSelectedPoint(point));
+    setDisplayPoints(false);
+  };
+
+  const handleClickInput = (evt) => {
+    switch (evt.target.name) {
+      case "city":
+        {
+          setDisplayPoints(false);
+          setDisplayCities(!displayCities);
+        }
+        break;
+      case "address":
+        {
+          setDisplayCities(false);
+          setDisplayPoints(!displayPoints);
+        }
+        break;
+    }
+  };
+
+  const handleChangeInput = (evt) => {
+    console.log(evt);
+    const regExpValue = new RegExp(evt.target.value, "i");
+    switch (evt.target.name) {
+      case "city":
+        {
+          setDisplayCities(true);
+          setSearchCities(
+            citiesData?.filter((city) => city.name.match(regExpValue))
+          );
+          setSearchCity(evt.target.value);
+        }
+        break;
+      case "address":
+        {
+          setDisplayPoints(true);
+          setSearchPoints(
+            pointsData
+              .filter((point) => point.cityId?.name === searchCity)
+              .filter(
+                (point) => point.address.match(regExpValue) && point.coordinates
+              )
+          );
+          setSearchPoint(evt.target.value);
+        }
+        break;
+    }
+  };
+
+  const handleBlurInput = () => {
+    setTimeout(() => {
+      setDisplayCities(false);
+      setDisplayPoints(false);
+    }, 300);
+  };
 
   return (
     <>
@@ -34,32 +123,21 @@ const PointSelection = ({
           </label>
           <div className="point__search">
             <input
-              ref={citiesInputRef}
               type="search"
               name="city"
               id="city"
               className="input"
               placeholder="Начните вводить город..."
               value={searchCity}
-              onClick={handleClickCities}
-              onChange={handleChangeCities}
+              onClick={handleClickInput}
+              onBlur={handleBlurInput}
+              onChange={handleChangeInput}
             />
             {displayCities && (
-              <div className="autocomplete">
-                {searchCities.map((city, index) => {
-                  return (
-                    <div
-                      className="autocomplete__item"
-                      onClick={() => handleSetCity(city)}
-                      key={index}
-                      tabIndex="0"
-                      onKeyDown={(evt) => handleKeyDownCity(evt, city)}
-                    >
-                      {city.name}
-                    </div>
-                  );
-                })}
-              </div>
+              <Autocomplete
+                arrayData={searchCities}
+                handleSet={handleSetCity}
+              />
             )}
           </div>
         </div>
@@ -69,7 +147,6 @@ const PointSelection = ({
           </label>
           <div className="point__search">
             <input
-              ref={pointsInputRef}
               type="search"
               name="address"
               id="address"
@@ -80,26 +157,16 @@ const PointSelection = ({
                   : "Нет адресов"
               }
               value={searchPoint}
-              onClick={handleClickPoints}
-              onChange={handleChangeAddresses}
+              onClick={handleClickInput}
+              onBlur={handleBlurInput}
+              onChange={handleChangeInput}
               disabled={!searchPoints && true}
             />
             {displayPoints && (
-              <div className="autocomplete">
-                {searchPoints?.map((point, index) => {
-                  return (
-                    <div
-                      className="autocomplete__item"
-                      onClick={() => handleSetPoint(point)}
-                      onKeyDown={(evt) => handleKeyDownAddress(evt, point)}
-                      key={index}
-                      tabIndex="0"
-                    >
-                      {point.address}
-                    </div>
-                  );
-                })}
-              </div>
+              <Autocomplete
+                arrayData={searchPoints}
+                handleSet={handleSetPoint}
+              />
             )}
           </div>
         </div>
@@ -109,10 +176,6 @@ const PointSelection = ({
         <MapContent
           handleSetCity={handleSetCity}
           handleSetPoint={handleSetPoint}
-          selectedCity={selectedCity}
-          selectedPoint={selectedPoint}
-          citiesData={citiesData}
-          pointsData={pointsData}
         />
       </div>
     </>

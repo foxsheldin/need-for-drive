@@ -8,15 +8,12 @@ import {
   YMaps,
   ZoomControl,
 } from "react-yandex-maps";
+import { useSelector } from "react-redux";
 
-const MapContent = ({
-  handleSetCity,
-  handleSetPoint,
-  selectedCity,
-  selectedPoint,
-  citiesData,
-  pointsData,
-}) => {
+const MapContent = ({ handleSetCity, handleSetPoint }) => {
+  const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
+    (state) => state.order
+  );
   const [centerMap, setCenterMap] = useState([54.337458, 48.382399]);
   const [pointZoom, setPointZoom] = useState(9.5);
   const [mapPoints, setMapPoints] = useState(pointsData);
@@ -87,7 +84,6 @@ const MapContent = ({
         >
           {pins}
 
-          <GeolocationControl options={{ float: "left" }} />
           <ZoomControl options={{ float: "left" }} />
         </Map>
       </YMaps>
