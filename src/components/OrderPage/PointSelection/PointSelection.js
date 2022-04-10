@@ -8,15 +8,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import MapContent from "./Map/MapContent";
 import "./styles.scss";
-import Autocomplete from "../../common/Autocomplete/Autocomplete";
+import InputAutocomplete from "../../common/InputAutocomplete/InputAutocomplete";
 
 const PointSelection = () => {
   const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
     (state) => state.order
   );
   const dispatch = useDispatch();
-  const [displayCities, setDisplayCities] = useState(false);
-  const [displayPoints, setDisplayPoints] = useState(false);
   const [searchCities, setSearchCities] = useState(citiesData);
   const [searchPoints, setSearchPoints] = useState(null);
   const [searchCity, setSearchCity] = useState(selectedCity?.name ?? "");
@@ -37,6 +35,10 @@ const PointSelection = () => {
       setSearchPoint("");
       dispatch(setSelectedCity(null));
       dispatch(setSelectedPoint(null));
+    } else {
+      setSearchPoints(
+        pointsData.filter((point) => point.cityId?.name === selectedCity.name)
+      );
     }
   }, [selectedCity, searchCity]);
 
@@ -47,71 +49,14 @@ const PointSelection = () => {
   }, [searchPoint]);
 
   const handleSetCity = (city) => {
-    dispatch(setSelectedCity(city));
     setSearchCity(city.name);
-    setDisplayCities(false);
-    setSearchPoints(
-      pointsData.filter((point) => point.cityId?.name === city.name)
-    );
+    dispatch(setSelectedCity(city));
+    setSearchPoint("");
   };
 
   const handleSetPoint = (point) => {
     setSearchPoint(point.address);
     dispatch(setSelectedPoint(point));
-    setDisplayPoints(false);
-  };
-
-  const handleClickInput = (evt) => {
-    switch (evt.target.name) {
-      case "city":
-        {
-          setDisplayPoints(false);
-          setDisplayCities(!displayCities);
-        }
-        break;
-      case "address":
-        {
-          setDisplayCities(false);
-          setDisplayPoints(!displayPoints);
-        }
-        break;
-    }
-  };
-
-  const handleChangeInput = (evt) => {
-    console.log(evt);
-    const regExpValue = new RegExp(evt.target.value, "i");
-    switch (evt.target.name) {
-      case "city":
-        {
-          setDisplayCities(true);
-          setSearchCities(
-            citiesData?.filter((city) => city.name.match(regExpValue))
-          );
-          setSearchCity(evt.target.value);
-        }
-        break;
-      case "address":
-        {
-          setDisplayPoints(true);
-          setSearchPoints(
-            pointsData
-              .filter((point) => point.cityId?.name === searchCity)
-              .filter(
-                (point) => point.address.match(regExpValue) && point.coordinates
-              )
-          );
-          setSearchPoint(evt.target.value);
-        }
-        break;
-    }
-  };
-
-  const handleBlurInput = () => {
-    setTimeout(() => {
-      setDisplayCities(false);
-      setDisplayPoints(false);
-    }, 300);
   };
 
   return (
@@ -121,54 +66,39 @@ const PointSelection = () => {
           <label htmlFor="city" className="label">
             Город
           </label>
-          <div className="point__search">
-            <input
-              type="search"
-              name="city"
-              id="city"
-              className="input"
-              placeholder="Начните вводить город..."
-              value={searchCity}
-              onClick={handleClickInput}
-              onBlur={handleBlurInput}
-              onChange={handleChangeInput}
-            />
-            {displayCities && (
-              <Autocomplete
-                arrayData={searchCities}
-                handleSet={handleSetCity}
-              />
-            )}
-          </div>
+          <InputAutocomplete
+            name={"city"}
+            placeholder={"Начните вводить город"}
+            arrayData={citiesData}
+            searchValues={searchCities}
+            searchValue={searchCity}
+            setSearchValues={setSearchCities}
+            setSearchValue={setSearchCity}
+            handleSet={handleSetCity}
+            disabled={false}
+          />
         </div>
         <div className="point__address">
           <label htmlFor="address" className="label">
             Пункт выдачи
           </label>
-          <div className="point__search">
-            <input
-              type="search"
-              name="address"
-              id="address"
-              className="input"
-              placeholder={
-                searchPoints?.length > 0
-                  ? "Начните вводить пункт..."
-                  : "Нет адресов"
-              }
-              value={searchPoint}
-              onClick={handleClickInput}
-              onBlur={handleBlurInput}
-              onChange={handleChangeInput}
-              disabled={!searchPoints && true}
-            />
-            {displayPoints && (
-              <Autocomplete
-                arrayData={searchPoints}
-                handleSet={handleSetPoint}
-              />
+          <InputAutocomplete
+            name={"address"}
+            placeholder={
+              searchPoints?.length > 0
+                ? "Начните вводить пункт..."
+                : "Нет адресов"
+            }
+            arrayData={pointsData.filter(
+              (point) => point.cityId?.name === searchCity
             )}
-          </div>
+            searchValues={searchPoints}
+            searchValue={searchPoint}
+            setSearchValues={setSearchPoints}
+            setSearchValue={setSearchPoint}
+            handleSet={handleSetPoint}
+            disabled={!searchPoints && true}
+          />
         </div>
       </div>
       <div className="content__map map">
