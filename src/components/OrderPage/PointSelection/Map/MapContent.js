@@ -1,16 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import placemarkIcon from "../../../../assets/images/placemark.svg";
 import "./styles.scss";
-import {
-  GeolocationControl,
-  Map,
-  Placemark,
-  YMaps,
-  ZoomControl,
-} from "react-yandex-maps";
-import { useSelector } from "react-redux";
+import { Map, Placemark, YMaps, ZoomControl } from "react-yandex-maps";
+import { useDispatch, useSelector } from "react-redux";
+import { getCities, getPoints } from "../../../../redux/orderSlice";
 
 const MapContent = ({ handleSetCity, handleSetPoint }) => {
+  const dispatch = useDispatch();
   const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
     (state) => state.order
   );
@@ -18,6 +14,11 @@ const MapContent = ({ handleSetCity, handleSetPoint }) => {
   const [pointZoom, setPointZoom] = useState(9.5);
   const [mapPoints, setMapPoints] = useState(pointsData);
   const mapRef = useRef();
+
+  useEffect(() => {
+    dispatch(getCities());
+    dispatch(getPoints());
+  }, []);
 
   useEffect(() => {
     setMapPoints(pointsData);
@@ -35,7 +36,9 @@ const MapContent = ({ handleSetCity, handleSetPoint }) => {
   }, [selectedPoint]);
 
   const handleClickPlacemark = async (point) => {
-    const cityData = citiesData.find((city) => city.name === point.cityId.name);
+    const cityData = await citiesData.find(
+      (city) => city.name === point.cityId.name
+    );
     await handleSetCity(cityData);
     await handleSetPoint(point);
   };
