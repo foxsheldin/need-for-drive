@@ -3,9 +3,14 @@ import placemarkIcon from "../../../../assets/images/placemark.svg";
 import "./styles.scss";
 import { Map, Placemark, YMaps, ZoomControl } from "react-yandex-maps";
 import { useDispatch, useSelector } from "react-redux";
-import { getCities, getPoints } from "../../../../redux/orderSlice";
+import {
+  getCities,
+  getPoints,
+  setSelectedCity,
+  setSelectedPoint,
+} from "../../../../redux/orderSlice";
 
-const MapContent = ({ handleSetCity, handleSetPoint }) => {
+const MapContent = () => {
   const dispatch = useDispatch();
   const { citiesData, pointsData, selectedCity, selectedPoint } = useSelector(
     (state) => state.order
@@ -39,8 +44,8 @@ const MapContent = ({ handleSetCity, handleSetPoint }) => {
     const cityData = await citiesData.find(
       (city) => city.name === point.cityId.name
     );
-    await handleSetCity(cityData);
-    await handleSetPoint(point);
+    dispatch(setSelectedCity(cityData));
+    dispatch(setSelectedPoint(point));
   };
 
   const onSelectPoint = async (center, zoom) => {

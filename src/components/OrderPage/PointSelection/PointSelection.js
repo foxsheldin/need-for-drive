@@ -15,10 +15,16 @@ const PointSelection = () => {
     (state) => state.order
   );
   const dispatch = useDispatch();
-  const [searchCities, setSearchCities] = useState(citiesData);
-  const [searchPoints, setSearchPoints] = useState(null);
-  const [searchCity, setSearchCity] = useState(selectedCity?.name ?? "");
-  const [searchPoint, setSearchPoint] = useState(selectedPoint?.address ?? "");
+  const [searchArrayCities, setSearchArrayCities] = useState(
+    citiesData.map((city) => city.name)
+  );
+  const [searchArrayPoints, setSearchArrayPoints] = useState(
+    selectedCity
+      ? pointsData
+          .filter((point) => point.cityId?.name === selectedCity?.name)
+          .map((point) => point.address)
+      : null
+  );
 
   useEffect(() => {
     dispatch(getCities());
@@ -26,37 +32,53 @@ const PointSelection = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setSearchCities(citiesData);
+    setSearchArrayCities(citiesData.map((city) => city.name));
   }, [citiesData]);
 
   useEffect(() => {
-    if (!selectedCity || !searchCity) {
-      setSearchPoints(null);
-      setSearchPoint("");
+    if (!selectedCity) {
+      setSearchArrayPoints(null);
       dispatch(setSelectedCity(null));
       dispatch(setSelectedPoint(null));
     } else {
-      setSearchPoints(
-        pointsData.filter((point) => point.cityId?.name === selectedCity.name)
+      setSearchArrayPoints(
+        selectedCity
+          ? pointsData
+              .filter((point) => point.cityId?.name === selectedCity?.name)
+              .map((point) => point.address)
+          : null
       );
     }
-  }, [selectedCity, searchCity]);
+  }, [selectedCity]);
 
   useEffect(() => {
-    if (!searchPoint) {
+    if (!selectedPoint) {
       dispatch(setSelectedPoint(null));
     }
-  }, [searchPoint]);
+  }, [selectedPoint]);
 
-  const handleSetCity = (city) => {
-    setSearchCity(city.name);
-    dispatch(setSelectedCity(city));
-    setSearchPoint("");
+  const handleSetCity = (selectCity) => {
+    if (selectCity) {
+      const cityObject = citiesData.find((city) => city.name === selectCity);
+      dispatch(setSelectedCity(cityObject));
+    } else {
+      dispatch(setSelectedCity(null));
+      dispatch(setSelectedPoint(null));
+    }
   };
 
-  const handleSetPoint = (point) => {
-    setSearchPoint(point.address);
-    dispatch(setSelectedPoint(point));
+  const handleSetPoint = (selectPoint) => {
+    if (selectPoint) {
+      const pointObject = pointsData
+        .filter(
+          (point) =>
+            point.cityId?.name === selectedCity.name && point.coordinates
+        )
+        .find((point) => point.address === selectPoint);
+      dispatch(setSelectedPoint(pointObject));
+    } else {
+      dispatch(setSelectedPoint(null));
+    }
   };
 
   return (
@@ -69,13 +91,9 @@ const PointSelection = () => {
           <InputAutocomplete
             name={"city"}
             placeholder={"Начните вводить город"}
-            arrayData={citiesData}
-            searchValues={searchCities}
-            searchValue={searchCity}
-            setSearchValues={setSearchCities}
-            setSearchValue={setSearchCity}
+            arrayData={searchArrayCities}
             handleSet={handleSetCity}
-            disabled={false}
+            selectedValue={selectedCity?.name ?? null}
           />
         </div>
         <div className="point__address">
@@ -85,28 +103,20 @@ const PointSelection = () => {
           <InputAutocomplete
             name={"address"}
             placeholder={
-              searchPoints?.length > 0
+              searchArrayPoints?.length > 0
                 ? "Начните вводить пункт..."
                 : "Нет адресов"
             }
-            arrayData={pointsData.filter(
-              (point) => point.cityId?.name === searchCity
-            )}
-            searchValues={searchPoints}
-            searchValue={searchPoint}
-            setSearchValues={setSearchPoints}
-            setSearchValue={setSearchPoint}
+            arrayData={searchArrayPoints}
             handleSet={handleSetPoint}
-            disabled={!searchPoints && true}
+            selectedValue={selectedPoint?.address ?? null}
+            disabled={!searchArrayPoints && true}
           />
         </div>
       </div>
       <div className="content__map map">
         <div className="map__information">Выбрать на карте:</div>
-        <MapContent
-          handleSetCity={handleSetCity}
-          handleSetPoint={handleSetPoint}
-        />
+        <MapContent />
       </div>
     </>
   );
