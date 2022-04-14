@@ -137,19 +137,19 @@
   color: $white;
   z-index: 10;
 
-  .opened-menu__bg {
+  &__bg {
     background-color: #111518;
     width: 100%;
     min-height: 100vh;
   }
 
-  .opened-menu__slider-blur {
+  &__slider-blur {
     display: none;
     background: rgba(21, 27, 31, 0.81);
   }
 
   @media (min-width: $tablet-width) {
-    .opened-menu__bg {
+    &__bg {
       display: grid;
       grid-template-columns: 86px 1fr;
     }
@@ -158,11 +158,11 @@
   @media (min-width: $desktop-min-width) {
     grid-template-columns: 1fr 410px;
 
-    .opened-menu__bg {
+    &__bg {
       grid-template-columns: 64px 1fr;
     }
 
-    .opened-menu__slider-blur {
+    &__slider-blur {
       display: block;
     }
   }

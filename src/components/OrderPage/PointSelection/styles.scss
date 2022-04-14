@@ -20,8 +20,8 @@
   align-items: flex-end;
   row-gap: 16px;
 
-  .point__city,
-  .point__address {
+  &__city,
+  &__address {
     display: flex;
     align-items: center;
     position: relative;
