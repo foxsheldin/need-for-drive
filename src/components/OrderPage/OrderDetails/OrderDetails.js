@@ -14,19 +14,26 @@ const OrderItem = ({ name, value }) => {
 };
 
 const OrderDetails = () => {
-  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
+  const { selectedCity, selectedPoint, selectedCar } = useSelector(
+    (state) => state.order
+  );
   const { stepOrder } = useParams();
   const [buttonAction, setButtonAction] = useState({
     name: "",
     linkTo: "link",
   });
-  const [price, setPrice] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
-    if (selectedCity && selectedPoint) setButtonDisabled(false);
+    if (selectedCity && selectedPoint && stepOrder === "point")
+      setButtonDisabled(false);
     else setButtonDisabled(true);
   }, [selectedCity, selectedPoint]);
+
+  useEffect(() => {
+    if (selectedCar && stepOrder === "model") setButtonDisabled(false);
+    else setButtonDisabled(true);
+  }, [selectedCar]);
 
   useEffect(() => {
     switch (stepOrder) {
@@ -35,12 +42,16 @@ const OrderDetails = () => {
           name: "Выбрать модель",
           linkTo: "/order/model",
         });
+        if (selectedCity && selectedPoint) setButtonDisabled(false);
+        else setButtonDisabled(true);
         break;
       case "model":
         setButtonAction({
           name: "Дополнительно",
           linkTo: "/order/additionally",
         });
+        if (selectedCar) setButtonDisabled(false);
+        else setButtonDisabled(true);
         break;
     }
   }, [stepOrder]);
@@ -54,10 +65,17 @@ const OrderDetails = () => {
             name={"Пункт выдачи"}
             value={selectedCity.name + ", " + selectedPoint.address}
           />
-          {price && (
+
+          {selectedCar && (
+            <OrderItem name={"Модель"} value={selectedCar.name} />
+          )}
+
+          {selectedCar && (
             <div className="order__price">
               <span className="order__price-name">Цена: </span>
-              <span className="order__amount-money">от 10000 до 32000 ₽</span>
+              <span className="order__amount-money">
+                от {selectedCar.priceMin} до {selectedCar.priceMax} ₽
+              </span>
             </div>
           )}
         </>

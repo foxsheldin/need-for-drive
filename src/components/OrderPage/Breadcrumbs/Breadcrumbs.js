@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import "./styles.scss";
 
 const Breadcrumbs = () => {
-  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
+  const { selectedCity, selectedPoint, selectedCar } = useSelector(
+    (state) => state.order
+  );
   const className = "breadcrumbs__item";
   const isActiveBreadcrumbs = ({ isActive }) =>
     isActive ? className + " breadcrumbs__item_active" : className;
@@ -41,6 +43,22 @@ const Breadcrumbs = () => {
       setStepsBreadcrumbs(newStepData);
     }
   }, [selectedCity, selectedPoint]);
+
+  useEffect(() => {
+    if (selectedCar) {
+      const newStepData = stepsBreadcrumbs.map((step) => {
+        step.id === "step3" ? (step.disabled = false) : null;
+        return step;
+      });
+      setStepsBreadcrumbs(newStepData);
+    } else {
+      const newStepData = stepsBreadcrumbs.map((step) => {
+        step.id === "step3" ? (step.disabled = true) : null;
+        return step;
+      });
+      setStepsBreadcrumbs(newStepData);
+    }
+  }, [selectedCar]);
 
   return (
     <div className="breadcrumbs__list main-wrapper">

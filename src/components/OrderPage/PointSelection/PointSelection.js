@@ -4,6 +4,7 @@ import {
   getPoints,
   setSelectedCity,
   setSelectedPoint,
+  setSelectedCar,
 } from "../../../redux/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MapContent from "./Map/MapContent";
@@ -54,6 +55,7 @@ const PointSelection = () => {
   useEffect(() => {
     if (!selectedPoint) {
       dispatch(setSelectedPoint(null));
+      dispatch(setSelectedCar(null));
     }
   }, [selectedPoint]);
 
