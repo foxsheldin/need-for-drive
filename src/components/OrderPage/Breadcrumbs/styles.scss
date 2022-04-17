@@ -33,12 +33,12 @@
         right: -23px;
       }
 
-      &.breadcrumbs__item_active {
+      &_active {
         pointer-events: none;
         color: $main-accent;
       }
 
-      &.breadcrumbs__item_disabled {
+      &_disabled {
         pointer-events: none;
         color: $gray;
       }
