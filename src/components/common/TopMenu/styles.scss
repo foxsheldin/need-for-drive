@@ -25,14 +25,14 @@
     justify-content: space-between;
   }
 
-  .place__logo {
+  &__logo {
     color: $main-accent;
     font-weight: 700;
     font-size: 30px;
     line-height: 35px;
   }
 
-  .place__location {
+  &__location {
     margin: 9px 0;
     position: relative;
     color: $gray;

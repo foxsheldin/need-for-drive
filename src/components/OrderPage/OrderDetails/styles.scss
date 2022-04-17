@@ -1,0 +1,68 @@
+@import "../../../scss/variables.scss";
+
+/* Order */
+
+.order {
+  margin-top: 20px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 0;
+    margin-left: 32px;
+  }
+
+  &__header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: right;
+    color: $black;
+  }
+
+  &__list {
+    margin-top: 26px;
+  }
+
+  &__item {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $black;
+
+    & .order__name-item {
+      max-width: 45%;
+    }
+
+    & .order__dotted {
+      flex-grow: 1;
+      border-bottom: 1px dotted $gray;
+      height: 1em;
+      margin: 0 0.4em;
+    }
+
+    & .order__value-item {
+      text-align: end;
+      color: $gray;
+      max-width: 60%;
+    }
+  }
+
+  &__price {
+    margin-top: 32px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+
+    & .order__amount-money {
+      font-weight: 400;
+    }
+  }
+
+  &__action {
+    margin-top: 32px;
+    width: 100%;
+  }
+}
