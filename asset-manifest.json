@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/need-for-drive/static/css/main.f8c1b33c.css",
-    "main.js": "/need-for-drive/static/js/main.d01af82e.js",
+    "main.css": "/need-for-drive/static/css/main.9de46d2b.css",
+    "main.js": "/need-for-drive/static/js/main.5dfcfc9d.js",
     "static/media/slide4.png": "/need-for-drive/static/media/slide4.217cd3aa9b96c81d08e0.png",
     "static/media/slide3.png": "/need-for-drive/static/media/slide3.d72757b08c1fef49bb06.png",
     "static/media/slide1.png": "/need-for-drive/static/media/slide1.02d38f72374225e81171.png",
@@ -46,15 +46,15 @@
     "index.html": "/need-for-drive/index.html",
     "static/media/location.svg": "/need-for-drive/static/media/location.6d4a93c7018dc81ea6ae0fc666b48620.svg",
     "static/media/preloader.svg": "/need-for-drive/static/media/preloader.13ff44b43c650a67d1a0ef57736d5a62.svg",
-    "static/media/cancel.svg": "/need-for-drive/static/media/cancel.13854ee106ed73c47a96.svg",
+    "static/media/cancel.svg": "/need-for-drive/static/media/cancel.01609553fec431d0b9d6.svg",
     "static/media/checkbox-on.svg": "/need-for-drive/static/media/checkbox-on.176599896b0e23e1be4d.svg",
-    "static/media/placemark.svg": "/need-for-drive/static/media/placemark.457e906945276fb0758a989660dd3bc9.svg",
-    "static/media/breadcrumb.svg": "/need-for-drive/static/media/breadcrumb.ce81e7425fdbcb8e18e8.svg",
-    "main.f8c1b33c.css.map": "/need-for-drive/static/css/main.f8c1b33c.css.map",
-    "main.d01af82e.js.map": "/need-for-drive/static/js/main.d01af82e.js.map"
+    "static/media/placemark.svg": "/need-for-drive/static/media/placemark.c961018a89ef1f0da3c21f3cc6bb3785.svg",
+    "static/media/breadcrumb.svg": "/need-for-drive/static/media/breadcrumb.3f54b55d7d55c4a8870e.svg",
+    "main.9de46d2b.css.map": "/need-for-drive/static/css/main.9de46d2b.css.map",
+    "main.5dfcfc9d.js.map": "/need-for-drive/static/js/main.5dfcfc9d.js.map"
   },
   "entrypoints": [
-    "static/css/main.f8c1b33c.css",
-    "static/js/main.d01af82e.js"
+    "static/css/main.9de46d2b.css",
+    "static/js/main.5dfcfc9d.js"
   ]
 }
