@@ -1,0 +1,44 @@
+@import "../../../scss/variables.scss";
+
+/* Point */
+
+.content__point {
+  width: 280px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  color: $black;
+
+  @media (min-width: $tablet-width) {
+    width: 325px;
+  }
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 16px;
+
+  &__city,
+  &__address {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+}
+
+/* Map */
+
+.content__map {
+  margin-top: 48px;
+  width: 100%;
+}
+
+.map .map__information {
+  color: $black;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 16px;
+}

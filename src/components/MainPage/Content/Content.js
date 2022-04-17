@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.scss";
 import TopMenu from "../../common/TopMenu/TopMenu";
 import SliderContent from "./Slider/SliderContent";
+import { Link } from "react-router-dom";
 
 const Content = () => {
   return (
@@ -19,7 +20,9 @@ const Content = () => {
             <p className="slogan__intro">
               Поминутная аренда авто твоего города
             </p>
-            <button className="button slogan__action">Забронировать</button>
+            <Link to={"/order/point"} className="button slogan__action">
+              Забронировать
+            </Link>
           </div>
           <div className="main-container__footer footer">
             <div className="main-wrapper">

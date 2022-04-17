@@ -1,0 +1,78 @@
+@import "../../../scss/variables.scss";
+
+.label {
+  margin-right: 5px;
+}
+
+.search {
+  .input[type="search"] {
+    height: 20px;
+    border: 0;
+    border-bottom: 1px solid $gray;
+    background: $white;
+    color: $black;
+
+    &:focus {
+      outline: 0;
+      border: 0;
+      border-bottom: 1px solid $black;
+
+      &::-webkit-search-cancel-button {
+        opacity: 1;
+      }
+    }
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      height: 8px;
+      width: 8px;
+      background: url("../../../assets/images/cancel.svg") no-repeat 50% 50%;
+      background-size: contain;
+      opacity: 0.5;
+    }
+
+    @media (min-width: $tablet-width) {
+      width: 224px;
+    }
+  }
+}
+
+/* Autocomplete */
+
+.autocomplete {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 106px;
+  width: 171px;
+  background-color: $white;
+  border: 1px solid $gray-light;
+  z-index: 3;
+  overflow-y: auto;
+
+  &__item {
+    padding: 8px;
+
+    &:hover {
+      color: $main-accent;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: $white;
+    border-left: 1px solid $gray-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 2px;
+    background-color: $gray;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  @media (min-width: $tablet-width) {
+    width: 222px;
+  }
+}
