@@ -73,6 +73,7 @@ const ModelSelection = () => {
 
   const handleSetCategory = (category) => {
     dispatch(setSelectedCategoryCars(category));
+    dispatch(setCurrentOffset(0));
   };
 
   return (
