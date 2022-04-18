@@ -39,7 +39,7 @@
         position: absolute;
         max-width: 100%;
         height: auto;
-        max-height: 80%;
+        max-height: 90%;
         bottom: 16px;
         right: 16px;
         box-sizing: content-box;
@@ -49,7 +49,7 @@
 
     @media (min-width: $tablet-width) {
       &__item {
-        height: 150px;
+        height: 135px;
         & .car-image {
           max-width: 85%;
         }
