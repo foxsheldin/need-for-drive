@@ -13,61 +13,45 @@ const Breadcrumbs = () => {
 
   const [stepsBreadcrumbs, setStepsBreadcrumbs] = useState([
     {
-      id: "step1",
       name: "Местоположение",
       linkTo: "/order/point",
       disabled: false,
     },
-    { id: "step2", name: "Модель", linkTo: "/order/model", disabled: true },
+    { name: "Модель", linkTo: "/order/model", disabled: true },
     {
-      id: "step3",
       name: "Дополнительно",
       linkTo: "/order/additionally",
       disabled: true,
     },
-    { id: "step4", name: "Итого", linkTo: "/order/total", disabled: true },
+    { name: "Итого", linkTo: "/order/total", disabled: true },
   ]);
 
+  const setStepData = (index, argsBool) => {
+    let newStepData = stepsBreadcrumbs;
+    newStepData[index].disabled = !argsBool;
+    setStepsBreadcrumbs([...newStepData]);
+  };
+
   useEffect(() => {
-    if (selectedCity && selectedPoint) {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step2" ? (step.disabled = false) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    } else {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step2" ? (step.disabled = true) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    }
+    setStepData(1, selectedCity && selectedPoint ? true : false);
   }, [selectedCity, selectedPoint]);
 
   useEffect(() => {
-    if (selectedCar) {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step3" ? (step.disabled = false) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    } else {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step3" ? (step.disabled = true) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    }
+    setStepData(2, selectedCar ? true : false);
   }, [selectedCar]);
 
   return (
     <div className="breadcrumbs__list main-wrapper">
-      {stepsBreadcrumbs.map((step) => {
+      {stepsBreadcrumbs.map((step, index) => {
         const stepClassName = step.disabled
           ? className + " breadcrumbs__item_disabled"
           : isActiveBreadcrumbs;
         return (
-          <NavLink to={step.linkTo} className={stepClassName} key={step.id}>
+          <NavLink
+            to={step.linkTo}
+            className={stepClassName}
+            key={"step-" + (index + 1)}
+          >
             {step.name}
           </NavLink>
         );
