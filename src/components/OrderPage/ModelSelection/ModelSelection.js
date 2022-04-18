@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
+import plugImage from "../../../assets/images/plugImage.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
@@ -120,6 +121,10 @@ const ModelSelection = () => {
                   crossOrigin="anonymous"
                   referrerPolicy="origin"
                   src={car.thumbnail.path}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = plugImage;
+                  }}
                   width="200"
                   height="133"
                   alt="car"
