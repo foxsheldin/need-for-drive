@@ -14,47 +14,32 @@ const OrderItem = ({ name, value }) => {
 };
 
 const OrderDetails = () => {
-  const { selectedCity, selectedPoint, selectedCar } = useSelector(
-    (state) => state.order
-  );
+  const { selectedCity, selectedPoint, selectedCar, stepsOrderBreadcrumbs } =
+    useSelector((state) => state.order);
   const { stepOrder } = useParams();
   const [buttonAction, setButtonAction] = useState({
-    name: "",
-    linkTo: "link",
+    nameOrderButton: "",
+    linkToNextStep: "link",
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [stepsOrder, setStepsOrder] = useState(stepsOrderBreadcrumbs);
 
   useEffect(() => {
-    if (selectedCity && selectedPoint && stepOrder === "point")
-      setButtonDisabled(false);
-    else setButtonDisabled(true);
-  }, [selectedCity, selectedPoint]);
-
-  useEffect(() => {
-    if (selectedCar && stepOrder === "model") setButtonDisabled(false);
-    else setButtonDisabled(true);
-  }, [selectedCar]);
+    setStepsOrder(stepsOrderBreadcrumbs);
+  }, [stepsOrderBreadcrumbs]);
 
   useEffect(() => {
     switch (stepOrder) {
       case "point":
-        setButtonAction({
-          name: "Выбрать модель",
-          linkTo: "/order/model",
-        });
-        if (selectedCity && selectedPoint) setButtonDisabled(false);
-        else setButtonDisabled(true);
+        setButtonAction({ ...stepsOrder[0] });
+        setButtonDisabled(stepsOrder[0]?.disabledOrderButton);
         break;
       case "model":
-        setButtonAction({
-          name: "Дополнительно",
-          linkTo: "/order/additionally",
-        });
-        if (selectedCar) setButtonDisabled(false);
-        else setButtonDisabled(true);
+        setButtonAction({ ...stepsOrder[1] });
+        setButtonDisabled(stepsOrder[1]?.disabledOrderButton);
         break;
     }
-  }, [stepOrder]);
+  }, [stepOrder, stepsOrder]);
 
   return (
     <div className="content__order order">
@@ -82,14 +67,14 @@ const OrderDetails = () => {
       )}
 
       <Link
-        to={buttonAction.linkTo}
+        to={buttonAction?.linkToNextStep}
         className={
           buttonDisabled
             ? "order__action button disabled"
             : "order__action button"
         }
       >
-        {buttonAction.name}
+        {buttonAction?.nameOrderButton}
       </Link>
     </div>
   );

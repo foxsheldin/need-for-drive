@@ -13,6 +13,40 @@ const initialState = {
   selectedPoint: null,
   selectedCategoryCars: { id: "0" },
   selectedCar: null,
+  stepsOrderBreadcrumbs: [
+    {
+      nameBreadcrumbs: "Местоположение",
+      linkToCurrentStep: "/order/point",
+      disabledBreadcrumbs: false,
+      nameOrderButton: "Выбрать модель",
+      linkToNextStep: "/order/model",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Модель",
+      linkToCurrentStep: "/order/model",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Дополнительно",
+      linkToNextStep: "/order/additionally",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Дополнительно",
+      linkToCurrentStep: "/order/additionally",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Итого",
+      linkToNextStep: "/order/total",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Итого",
+      linkToCurrentStep: "/order/total",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Заказать",
+      linkToNextStep: "#",
+      disabledOrderButton: true,
+    },
+  ],
   isLoading: false,
   stateError: false,
 };
@@ -176,6 +210,14 @@ export const orderSlice = createSlice({
       state.selectedRate = null;
       state.totalPrice = null;
     },
+    setDisabledOrderButton(state, action) {
+      state.stepsOrderBreadcrumbs[action.payload.index].disabledOrderButton =
+        action.payload.value;
+    },
+    setDisabledBreadcrumbs(state, action) {
+      state.stepsOrderBreadcrumbs[action.payload.index].disabledBreadcrumbs =
+        action.payload.value;
+    },
   },
   extraReducers: {
     [getCities.pending]: (state) => {
@@ -233,6 +275,8 @@ export const {
   setSelectedPoint,
   setSelectedCategoryCars,
   setSelectedCar,
+  setDisabledOrderButton,
+  setDisabledBreadcrumbs,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
