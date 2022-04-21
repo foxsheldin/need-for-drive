@@ -11,7 +11,7 @@ const initialState = {
   totalCars: 0,
   selectedCity: null,
   selectedPoint: null,
-  selectedCategoryCars: { id: "0" },
+  selectedCategoryCars: { id: "0", name: "Все" },
   selectedCar: null,
   stepsOrderBreadcrumbs: [
     {
@@ -44,7 +44,7 @@ const initialState = {
       disabledBreadcrumbs: true,
       nameOrderButton: "Заказать",
       linkToNextStep: "#",
-      disabledOrderButton: true,
+      disabledOrderButton: false,
     },
   ],
   isLoading: false,
