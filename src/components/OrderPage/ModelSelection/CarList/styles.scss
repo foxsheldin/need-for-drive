@@ -1,0 +1,66 @@
+@import "../../../../scss/variables.scss";
+
+.car-list {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+
+  &__item {
+    position: relative;
+    border: 1px solid $gray-light;
+    cursor: pointer;
+    height: 180px;
+    padding: 16px;
+
+    &:hover,
+    &:focus,
+    &_active {
+      border-color: $main-accent;
+    }
+
+    & .car-name {
+      font-size: 18px;
+      line-height: 21px;
+      text-transform: uppercase;
+      color: $black;
+    }
+
+    & .car-price {
+      margin-top: 5px;
+      font-size: 14px;
+      line-height: 16px;
+      color: $gray;
+    }
+
+    & .car-image {
+      position: absolute;
+      max-width: 100%;
+      height: auto;
+      max-height: 90%;
+      bottom: 16px;
+      right: 16px;
+      box-sizing: content-box;
+      z-index: -1;
+    }
+  }
+
+  @media (min-width: $tablet-width) {
+    &__item {
+      height: 135px;
+      & .car-image {
+        max-width: 85%;
+      }
+    }
+  }
+
+  @media (min-width: $desktop-min-width) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: $desktop-width) {
+    &__item {
+      max-height: 224px;
+    }
+  }
+}
