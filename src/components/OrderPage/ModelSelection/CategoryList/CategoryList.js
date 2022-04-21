@@ -27,6 +27,7 @@ const CategoryList = () => {
       <ul className="radio-list">
         {categoriesItems?.map((category) => (
           <Radiobutton
+            nameInput={"categoryCar"}
             name={category.name}
             onClick={() => handleSetCategory(category)}
             compare={selectedCategoryCars.name}
