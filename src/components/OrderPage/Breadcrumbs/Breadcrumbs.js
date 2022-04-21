@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   setDisabledBreadcrumbs,
   setDisabledOrderButton,
@@ -21,11 +21,11 @@ const Breadcrumbs = () => {
   };
 
   useEffect(() => {
-    setStepData(1, selectedCity && selectedPoint ? true : false);
+    setStepData(1, !!selectedCity && !!selectedPoint);
   }, [selectedCity, selectedPoint]);
 
   useEffect(() => {
-    setStepData(2, selectedCar ? true : false);
+    setStepData(2, !!selectedCar);
   }, [selectedCar]);
 
   return (
