@@ -1,6 +1,6 @@
 import React from "react";
 
-const Radiobutton = ({ name, onClick, compare, nameInput }) => {
+const Radiobutton = ({ name, onClick, compare, nameInput, textLabel }) => {
   return (
     <li className="radio-list__item">
       <input
@@ -12,7 +12,7 @@ const Radiobutton = ({ name, onClick, compare, nameInput }) => {
         onClick={onClick}
         defaultChecked={name === compare ? true : false}
       />
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={name}>{textLabel}</label>
     </li>
   );
 };

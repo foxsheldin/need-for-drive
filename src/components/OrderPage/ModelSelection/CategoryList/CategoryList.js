@@ -29,6 +29,7 @@ const CategoryList = () => {
           <Radiobutton
             nameInput={"categoryCar"}
             name={category.name}
+            textLabel={category.name}
             onClick={() => handleSetCategory(category)}
             compare={selectedCategoryCars.name}
             key={category.id}
