@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles.scss";
+import { useGenerateButtonActions } from "./hooks/use-generate-button-actions";
 
 const OrderItem = ({ name, value }) => {
   return (
@@ -17,29 +18,11 @@ const OrderDetails = () => {
   const { selectedCity, selectedPoint, selectedCar, stepsOrderBreadcrumbs } =
     useSelector((state) => state.order);
   const { stepOrder } = useParams();
-  const [buttonAction, setButtonAction] = useState({
-    nameOrderButton: "",
-    linkToNextStep: "link",
+
+  const { buttonAction, buttonDisabled } = useGenerateButtonActions({
+    stepOrder,
+    stepsOrderBreadcrumbs,
   });
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [stepsOrder, setStepsOrder] = useState(stepsOrderBreadcrumbs);
-
-  useEffect(() => {
-    setStepsOrder(stepsOrderBreadcrumbs);
-  }, [stepsOrderBreadcrumbs]);
-
-  useEffect(() => {
-    switch (stepOrder) {
-      case "point":
-        setButtonAction({ ...stepsOrder[0] });
-        setButtonDisabled(stepsOrder[0]?.disabledOrderButton);
-        break;
-      case "model":
-        setButtonAction({ ...stepsOrder[1] });
-        setButtonDisabled(stepsOrder[1]?.disabledOrderButton);
-        break;
-    }
-  }, [stepOrder, stepsOrder]);
 
   return (
     <div className="content__order order">
