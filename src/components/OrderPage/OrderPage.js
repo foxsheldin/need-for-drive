@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import AsideMenu from "../common/AsideMenu/AsideMenu";
 import TopMenu from "../common/TopMenu/TopMenu";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
+import ModelSelection from "./ModelSelection/ModelSelection";
 import OrderDetails from "./OrderDetails/OrderDetails";
 import PointSelection from "./PointSelection/PointSelection";
 import "./styles.scss";
@@ -21,6 +22,8 @@ const OrderPage = () => {
     switch (currentStep) {
       case "point":
         return <PointSelection />;
+      case "model":
+        return <ModelSelection />;
       default:
         return null;
     }

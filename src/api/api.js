@@ -4,6 +4,7 @@ const instance = axios.create({
   baseURL: "https://api-factory.simbirsoft1.com/api/",
   headers: {
     "X-Api-Factory-Application-Id": process.env.REACT_APP_DB_API_KEY,
+    "Access-Control-Max-Age": 3600,
   },
 });
 
@@ -21,6 +22,18 @@ export const databaseAPI = {
   },
   getPoints() {
     return instance.get("db/point");
+  },
+  getCars(offset, limit = 6, category = null) {
+    return instance.get("db/car", {
+      params: {
+        offset,
+        limit,
+        categoryId: category?.id,
+      },
+    });
+  },
+  getCategories() {
+    return instance.get("db/category");
   },
 };
 

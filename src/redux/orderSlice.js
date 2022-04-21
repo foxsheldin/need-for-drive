@@ -4,10 +4,51 @@ import { databaseAPI, mapAPI } from "../api/api";
 const initialState = {
   citiesData: [],
   pointsData: [],
+  carsData: [],
+  categoriesData: [],
+  currentOffset: 0,
+  limitLoadingCars: 6,
+  totalCars: 0,
   selectedCity: null,
   selectedPoint: null,
-  stateStatus: null,
-  stateError: null,
+  selectedCategoryCars: { id: "0", name: "Все" },
+  selectedCar: null,
+  stepsOrderBreadcrumbs: [
+    {
+      nameBreadcrumbs: "Местоположение",
+      linkToCurrentStep: "/order/point",
+      disabledBreadcrumbs: false,
+      nameOrderButton: "Выбрать модель",
+      linkToNextStep: "/order/model",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Модель",
+      linkToCurrentStep: "/order/model",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Дополнительно",
+      linkToNextStep: "/order/additionally",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Дополнительно",
+      linkToCurrentStep: "/order/additionally",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Итого",
+      linkToNextStep: "/order/total",
+      disabledOrderButton: true,
+    },
+    {
+      nameBreadcrumbs: "Итого",
+      linkToCurrentStep: "/order/total",
+      disabledBreadcrumbs: true,
+      nameOrderButton: "Заказать",
+      linkToNextStep: "#",
+      disabledOrderButton: false,
+    },
+  ],
+  isLoading: false,
+  stateError: false,
 };
 
 export const getCities = createAsyncThunk(
@@ -81,6 +122,55 @@ export const getPoints = createAsyncThunk(
   }
 );
 
+export const getCars = createAsyncThunk(
+  "order/getCars",
+  async (configQuery, { rejectWithValue, dispatch, getState }) => {
+    try {
+      const errorMessage = "Что-то пошло не так при загрузке автомобилей";
+      let category = getState().order.selectedCategoryCars;
+      if (category.id === "0") category = null;
+      let response = await databaseAPI.getCars(
+        configQuery.offset,
+        configQuery.limit,
+        category
+      );
+
+      if (response.status !== 200) {
+        throw new Error(errorMessage);
+      }
+      dispatch(setTotalCars(response.data.count));
+      response = await response.data.data;
+      dispatch(setCars(response));
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getCategories = createAsyncThunk(
+  "order/getCategories",
+  async (_, { rejectWithValue, dispatch, getState }) => {
+    let categoriesExist = getState().order.categoriesData.length;
+    if (!categoriesExist) {
+      try {
+        const errorMessage = "Что-то пошло не так при загрузке категорий";
+        let response = await databaseAPI.getCategories();
+
+        if (response.status !== 200) {
+          throw new Error(errorMessage);
+        }
+
+        response = await response.data.data;
+        response.unshift({ id: "0", name: "Все" });
+
+        dispatch(setCategories(response));
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -91,40 +181,102 @@ export const orderSlice = createSlice({
     setPoints(state, action) {
       state.pointsData = action.payload;
     },
+    setCars(state, action) {
+      state.carsData = action.payload;
+    },
+    setTotalCars(state, action) {
+      state.totalCars = action.payload;
+    },
+    setCategories(state, action) {
+      state.categoriesData = action.payload;
+    },
+    setCurrentOffset(state, action) {
+      state.currentOffset = action.payload;
+    },
     setSelectedCity(state, action) {
       state.selectedCity = action.payload;
     },
     setSelectedPoint(state, action) {
       state.selectedPoint = action.payload;
     },
+    setSelectedCategoryCars(state, action) {
+      state.selectedCategoryCars = action.payload;
+    },
+    setSelectedCar(state, action) {
+      state.selectedCar = action.payload;
+      state.startDateRate = null;
+      state.endDateRate = null;
+      state.selectedColor = null;
+      state.selectedRate = null;
+      state.totalPrice = null;
+    },
+    setDisabledOrderButton(state, action) {
+      state.stepsOrderBreadcrumbs[action.payload.index].disabledOrderButton =
+        action.payload.value;
+    },
+    setDisabledBreadcrumbs(state, action) {
+      state.stepsOrderBreadcrumbs[action.payload.index].disabledBreadcrumbs =
+        action.payload.value;
+    },
   },
   extraReducers: {
     [getCities.pending]: (state) => {
-      state.stateStatus = "loading";
-      state.stateError = null;
+      state.isLoading = true;
     },
     [getCities.fulfilled]: (state) => {
-      state.stateStatus = "resolved";
+      state.isLoading = false;
     },
     [getCities.rejected]: (state, action) => {
-      state.stateStatus = "rejected";
+      state.isLoading = false;
       state.stateError = action.payload;
     },
     [getPoints.pending]: (state) => {
-      state.stateStatus = "loading";
+      state.isLoading = true;
       state.stateError = null;
     },
     [getPoints.fulfilled]: (state) => {
-      state.stateStatus = "resolved";
+      state.isLoading = false;
     },
     [getPoints.rejected]: (state, action) => {
-      state.stateStatus = "rejected";
+      state.isLoading = false;
+      state.stateError = action.payload;
+    },
+    [getCars.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getCars.fulfilled]: (state) => {
+      state.isLoading = false;
+    },
+    [getCars.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.stateError = action.payload;
+    },
+    [getCategories.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getCategories.fulfilled]: (state) => {
+      state.isLoading = false;
+    },
+    [getCategories.rejected]: (state, action) => {
+      state.isLoading = false;
       state.stateError = action.payload;
     },
   },
 });
 
-export const { setCities, setPoints, setSelectedCity, setSelectedPoint } =
-  orderSlice.actions;
+export const {
+  setCities,
+  setPoints,
+  setCategories,
+  setCars,
+  setTotalCars,
+  setCurrentOffset,
+  setSelectedCity,
+  setSelectedPoint,
+  setSelectedCategoryCars,
+  setSelectedCar,
+  setDisabledOrderButton,
+  setDisabledBreadcrumbs,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;

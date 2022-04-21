@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles.scss";
+import { useGenerateButtonActions } from "./hooks/use-generate-button-actions";
 
 const OrderItem = ({ name, value }) => {
   return (
@@ -14,36 +15,14 @@ const OrderItem = ({ name, value }) => {
 };
 
 const OrderDetails = () => {
-  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
+  const { selectedCity, selectedPoint, selectedCar, stepsOrderBreadcrumbs } =
+    useSelector((state) => state.order);
   const { stepOrder } = useParams();
-  const [buttonAction, setButtonAction] = useState({
-    name: "",
-    linkTo: "link",
+
+  const { buttonAction, buttonDisabled } = useGenerateButtonActions({
+    stepOrder,
+    stepsOrderBreadcrumbs,
   });
-  const [price, setPrice] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-
-  useEffect(() => {
-    if (selectedCity && selectedPoint) setButtonDisabled(false);
-    else setButtonDisabled(true);
-  }, [selectedCity, selectedPoint]);
-
-  useEffect(() => {
-    switch (stepOrder) {
-      case "point":
-        setButtonAction({
-          name: "Выбрать модель",
-          linkTo: "/order/model",
-        });
-        break;
-      case "model":
-        setButtonAction({
-          name: "Дополнительно",
-          linkTo: "/order/additionally",
-        });
-        break;
-    }
-  }, [stepOrder]);
 
   return (
     <div className="content__order order">
@@ -54,24 +33,31 @@ const OrderDetails = () => {
             name={"Пункт выдачи"}
             value={selectedCity.name + ", " + selectedPoint.address}
           />
-          {price && (
+
+          {selectedCar && (
+            <OrderItem name={"Модель"} value={selectedCar.name} />
+          )}
+
+          {selectedCar && (
             <div className="order__price">
               <span className="order__price-name">Цена: </span>
-              <span className="order__amount-money">от 10000 до 32000 ₽</span>
+              <span className="order__amount-money">
+                от {selectedCar.priceMin} до {selectedCar.priceMax} ₽
+              </span>
             </div>
           )}
         </>
       )}
 
       <Link
-        to={buttonAction.linkTo}
+        to={buttonAction?.linkToNextStep}
         className={
           buttonDisabled
             ? "order__action button disabled"
             : "order__action button"
         }
       >
-        {buttonAction.name}
+        {buttonAction?.nameOrderButton}
       </Link>
     </div>
   );
