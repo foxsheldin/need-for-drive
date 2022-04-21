@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   setDisabledBreadcrumbs,
   setDisabledOrderButton,
@@ -14,13 +14,6 @@ const Breadcrumbs = () => {
   const className = "breadcrumbs__item";
   const isActiveBreadcrumbs = ({ isActive }) =>
     isActive ? className + " breadcrumbs__item_active" : className;
-  const [stepsBreadcrumbs, setStepsBreadcrumbs] = useState([
-    ...stepsOrderBreadcrumbs,
-  ]);
-
-  useEffect(() => {
-    setStepsBreadcrumbs([...stepsOrderBreadcrumbs]);
-  }, [stepsOrderBreadcrumbs]);
 
   const setStepData = (index, argsBool) => {
     dispatch(setDisabledOrderButton({ index: index - 1, value: !argsBool }));
@@ -37,7 +30,7 @@ const Breadcrumbs = () => {
 
   return (
     <div className="breadcrumbs__list main-wrapper">
-      {stepsBreadcrumbs.map((step, index) => {
+      {stepsOrderBreadcrumbs.map((step, index) => {
         const stepClassName = step?.disabledBreadcrumbs
           ? className + " breadcrumbs__item_disabled"
           : isActiveBreadcrumbs;
