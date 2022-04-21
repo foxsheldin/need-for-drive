@@ -6,6 +6,9 @@
 body {
   margin: 0;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 a {
@@ -198,5 +201,152 @@ a {
       background: #1b0c31;
       background: linear-gradient(90deg, #1b0c31 2.61%, #4d0853 112.6%);
     }
+  }
+}
+
+/* Text */
+
+.text-bold {
+  font-weight: 700;
+}
+
+/* Radiobutton */
+
+.radio-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 36px;
+  row-gap: 12px;
+  list-style: none;
+  margin: 0;
+  margin-left: 20px;
+  padding: 0;
+
+  &__item {
+    position: relative;
+    color: $gray;
+
+    .radiobutton {
+      & + label::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 0;
+        width: 11px;
+        height: 11px;
+        border: 1px solid $gray;
+        border-radius: 50%;
+      }
+
+      &:checked + label::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        top: 0;
+        left: -20px;
+        border: 3px solid $main-accent;
+        border-radius: 50%;
+      }
+
+      &:hover + label::before,
+      &:focus + label::before {
+        border-color: $main-accent;
+      }
+
+      &:hover + label,
+      &:focus + label,
+      &:checked + label {
+        color: $black;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* Checkbox */
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 36px;
+  row-gap: 12px;
+  list-style: none;
+  margin: 0;
+  margin-left: 20px;
+  padding: 0;
+
+  &__item {
+    position: relative;
+    color: $gray;
+
+    .checkbutton {
+      & + label::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 0;
+        width: 11px;
+        height: 11px;
+        border: 1px solid $gray;
+      }
+
+      &:checked + label::after {
+        content: url(../assets/images/checkbox-on.svg);
+        position: absolute;
+        width: 13px;
+        height: 10px;
+        top: -1px;
+        left: -17px;
+      }
+
+      &:hover + label::before,
+      &:focus + label::before,
+      &:checked + label::before {
+        border-color: $main-accent;
+      }
+
+      &:hover + label,
+      &:focus + label,
+      &:checked + label {
+        color: $black;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* Paginate */
+
+.paginate {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  column-gap: 3px;
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+
+  li a {
+    border-radius: 50px;
+    text-align: center;
+    vertical-align: middle;
+    color: $gray;
+    cursor: pointer;
+    border: 1px solid $gray;
+    padding: 5px 7px;
+  }
+
+  li:hover a,
+  li:focus a,
+  li.active a {
+    border-color: $main-accent;
+    background-color: $main-accent;
+    color: $white;
+  }
+
+  @media (min-width: $tablet-width) {
+    column-gap: 20px;
   }
 }

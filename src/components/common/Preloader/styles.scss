@@ -1,0 +1,20 @@
+@import "../../../scss/variables.scss";
+
+.preloader {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__image {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__message {
+    font-size: 18px;
+    font-weight: 600;
+    color: $gray;
+  }
+}

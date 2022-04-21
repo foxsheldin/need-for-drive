@@ -1,56 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import {
+  setDisabledBreadcrumbs,
+  setDisabledOrderButton,
+} from "../../../redux/orderSlice";
 import "./styles.scss";
 
 const Breadcrumbs = () => {
-  const { selectedCity, selectedPoint } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+  const { selectedCity, selectedPoint, selectedCar, stepsOrderBreadcrumbs } =
+    useSelector((state) => state.order);
   const className = "breadcrumbs__item";
   const isActiveBreadcrumbs = ({ isActive }) =>
     isActive ? className + " breadcrumbs__item_active" : className;
 
-  const [stepsBreadcrumbs, setStepsBreadcrumbs] = useState([
-    {
-      id: "step1",
-      name: "Местоположение",
-      linkTo: "/order/point",
-      disabled: false,
-    },
-    { id: "step2", name: "Модель", linkTo: "/order/model", disabled: true },
-    {
-      id: "step3",
-      name: "Дополнительно",
-      linkTo: "/order/additionally",
-      disabled: true,
-    },
-    { id: "step4", name: "Итого", linkTo: "/order/total", disabled: true },
-  ]);
+  const setStepData = (index, argsBool) => {
+    dispatch(setDisabledOrderButton({ index: index - 1, value: !argsBool }));
+    dispatch(setDisabledBreadcrumbs({ index, value: !argsBool }));
+  };
 
   useEffect(() => {
-    if (selectedCity && selectedPoint) {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step2" ? (step.disabled = false) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    } else {
-      const newStepData = stepsBreadcrumbs.map((step) => {
-        step.id === "step2" ? (step.disabled = true) : null;
-        return step;
-      });
-      setStepsBreadcrumbs(newStepData);
-    }
+    setStepData(1, !!selectedCity && !!selectedPoint);
   }, [selectedCity, selectedPoint]);
+
+  useEffect(() => {
+    setStepData(2, !!selectedCar);
+  }, [selectedCar]);
 
   return (
     <div className="breadcrumbs__list main-wrapper">
-      {stepsBreadcrumbs.map((step) => {
-        const stepClassName = step.disabled
+      {stepsOrderBreadcrumbs.map((step, index) => {
+        const stepClassName = step?.disabledBreadcrumbs
           ? className + " breadcrumbs__item_disabled"
           : isActiveBreadcrumbs;
         return (
-          <NavLink to={step.linkTo} className={stepClassName} key={step.id}>
-            {step.name}
+          <NavLink
+            to={step?.linkToCurrentStep}
+            className={stepClassName}
+            key={"step-" + (index + 1)}
+          >
+            {step?.nameBreadcrumbs}
           </NavLink>
         );
       })}
