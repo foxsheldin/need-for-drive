@@ -4,6 +4,7 @@ import {
   setCurrentOffset,
   setSelectedCategoryCars,
 } from "../../../../redux/orderSlice";
+import Radiobutton from "../../../common/Radiobutton/Radiobutton";
 
 const CategoryList = () => {
   const dispatch = useDispatch();
@@ -25,20 +26,12 @@ const CategoryList = () => {
     <div className="category">
       <ul className="radio-list">
         {categoriesItems?.map((category) => (
-          <li className="radio-list__item" key={category.id}>
-            <input
-              type="radio"
-              className="visually-hidden radiobutton"
-              name="categoryCar"
-              value={category.name}
-              id={category.name}
-              onClick={() => handleSetCategory(category)}
-              defaultChecked={
-                category.id === selectedCategoryCars.id ? true : false
-              }
-            />
-            <label htmlFor={category.name}>{category.name}</label>
-          </li>
+          <Radiobutton
+            name={category.name}
+            onClick={() => handleSetCategory(category)}
+            compare={selectedCategoryCars.name}
+            key={category.id}
+          />
         ))}
       </ul>
     </div>
