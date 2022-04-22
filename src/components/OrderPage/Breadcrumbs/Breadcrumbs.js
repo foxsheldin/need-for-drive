@@ -9,8 +9,17 @@ import "./styles.scss";
 
 const Breadcrumbs = () => {
   const dispatch = useDispatch();
-  const { selectedCity, selectedPoint, selectedCar, stepsOrderBreadcrumbs } =
-    useSelector((state) => state.order);
+  const {
+    orderId,
+    selectedCity,
+    selectedPoint,
+    selectedCar,
+    selectedColor,
+    startDateRate,
+    endDateRate,
+    selectedRate,
+    stepsOrderBreadcrumbs,
+  } = useSelector((state) => state.order);
   const className = "breadcrumbs__item";
   const isActiveBreadcrumbs = ({ isActive }) =>
     isActive ? className + " breadcrumbs__item_active" : className;
@@ -28,22 +37,35 @@ const Breadcrumbs = () => {
     setStepData(2, !!selectedCar);
   }, [selectedCar]);
 
+  useEffect(() => {
+    setStepData(
+      3,
+      !!selectedColor && !!startDateRate && !!endDateRate && !!selectedRate
+    );
+  }, [selectedColor, startDateRate, endDateRate, selectedRate]);
+
   return (
     <div className="breadcrumbs__list main-wrapper">
-      {stepsOrderBreadcrumbs.map((step, index) => {
-        const stepClassName = step?.disabledBreadcrumbs
-          ? className + " breadcrumbs__item_disabled"
-          : isActiveBreadcrumbs;
-        return (
-          <NavLink
-            to={step?.linkToCurrentStep}
-            className={stepClassName}
-            key={"step-" + (index + 1)}
-          >
-            {step?.nameBreadcrumbs}
-          </NavLink>
-        );
-      })}
+      {orderId ? (
+        <div className="breadcrumbs__item">
+          Заказ номер {orderId.toUpperCase()}
+        </div>
+      ) : (
+        stepsOrderBreadcrumbs.map((step, index) => {
+          const stepClassName = step?.disabledBreadcrumbs
+            ? className + " breadcrumbs__item_disabled"
+            : isActiveBreadcrumbs;
+          return (
+            <NavLink
+              to={step?.linkToCurrentStep}
+              className={stepClassName}
+              key={"step-" + (index + 1)}
+            >
+              {step?.nameBreadcrumbs}
+            </NavLink>
+          );
+        })
+      )}
     </div>
   );
 };

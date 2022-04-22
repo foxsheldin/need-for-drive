@@ -1,0 +1,31 @@
+@import "../../../scss/variables.scss";
+
+.color-car {
+  .label + .radio-list {
+    margin-top: 16px;
+  }
+}
+
+.rate {
+  margin-top: 32px;
+
+  .label + .radio-list {
+    margin-top: 16px;
+  }
+
+  & > .radio-list {
+    flex-direction: column;
+  }
+}
+
+.add-service {
+  margin-top: 32px;
+
+  .label + .checkbox-list {
+    margin-top: 16px;
+  }
+
+  & > .checkbox-list {
+    flex-direction: column;
+  }
+}

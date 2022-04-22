@@ -1,0 +1,51 @@
+@import "../../../../scss/variables.scss";
+
+.rental {
+  margin-top: 32px;
+
+  &__dates {
+    .rental__date-from,
+    .rental__date-to {
+      display: flex;
+      justify-content: flex-end;
+      width: 250px;
+      margin-top: 16px;
+
+      & > .label {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+/* React Datepicker */
+
+.react-datepicker-wrapper {
+  width: 224px !important;
+
+  .react-datepicker__input-container {
+    input[type="text"] {
+      width: 100%;
+      border: 0;
+      padding-left: 5px;
+      border-bottom: 1px solid $gray;
+      background: $white;
+      color: $black;
+
+      &:focus {
+        outline: 0;
+        border: 0;
+        border-bottom: 1px solid $black;
+      }
+    }
+
+    .react-datepicker__close-icon {
+      right: -7px;
+      &::after {
+        content: url("../../../../assets/images/cancel.svg");
+        background-color: transparent;
+        opacity: 0.5;
+      }
+    }
+  }
+}
