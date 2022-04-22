@@ -33,12 +33,6 @@ export function useGenerateButtonActions({
         setButtonDisabled(stepsOrderBreadcrumbs[2]?.disabledOrderButton);
         break;
       case "total":
-        if (selectedColor === "Любой" && selectedCar.colors.length) {
-          const colors = selectedCar.colors;
-          dispatch(
-            setSelectedColor(colors[Math.floor(Math.random() * colors.length)])
-          );
-        }
         setButtonAction({
           nameOrderButton: "Заказать",
           linkToNextStep: "#",
