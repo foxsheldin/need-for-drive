@@ -51,7 +51,10 @@ const OrderPage = () => {
     }
   };
 
-  const сurrentStepContent = getCurrentStepContent();
+  const сurrentStepContent = React.useMemo(
+    () => getCurrentStepContent(),
+    [currentStep]
+  );
 
   return (
     <div className="order-page">
