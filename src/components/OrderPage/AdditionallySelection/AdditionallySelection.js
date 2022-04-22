@@ -11,6 +11,7 @@ import {
 } from "../../../redux/orderSlice";
 import Radiobutton from "../../common/Radiobutton/Radiobutton";
 import Rental from "./Rental/Rental";
+import Checkbox from "../../common/Checkbox/Checkbox";
 
 const AdditionallySelection = () => {
   const dispatch = useDispatch();
@@ -100,18 +101,13 @@ const AdditionallySelection = () => {
         <label className="label">Доп услуги</label>
         <ul className="checkbox-list">
           {additionallyServiceData.map((item, index) => (
-            <li className="checkbox-list__item" key={index}>
-              <input
-                type="checkbox"
-                className="visually-hidden checkbutton"
-                id={item.name}
-                onChange={() => handleChangeAddService(item)}
-                checked={item.value}
-              />
-              <label htmlFor={item.name} className="label">
-                {item.name}, {item.price}₽
-              </label>
-            </li>
+            <Checkbox
+              id={item.name}
+              onChange={() => handleChangeAddService(item)}
+              checked={item.value}
+              textLabel={item.name + ", " + item.price + "₽"}
+              key={index}
+            />
           ))}
         </ul>
       </div>
