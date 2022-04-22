@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { setSelectedColor } from "../../../../redux/orderSlice";
 
 export function useGenerateButtonActions({
   handleOrderClick,
   stepOrder,
   stepsOrderBreadcrumbs,
-  selectedCar,
-  selectedColor,
 }) {
-  const dispatch = useDispatch();
   const location = useLocation();
   const regexOrderConfirm = new RegExp("order/confirm", "g");
   const [buttonDisabled, setButtonDisabled] = useState(true);
