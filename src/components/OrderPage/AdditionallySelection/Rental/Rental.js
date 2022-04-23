@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setStartDateRate, setEndDateRate } from "../../../../redux/orderSlice";
+import Datepicker from "../../../common/Datepicker/Datepicker";
 import "./styles.scss";
 
 const Rental = () => {
@@ -43,47 +43,25 @@ const Rental = () => {
     <div className="rental">
       <label className="label">Дата аренды</label>
       <div className="rental__dates">
-        <div className="rental__date-from">
-          <label htmlFor="dateFrom" className="label">
-            С
-          </label>
-          <DatePicker
-            сlassName={"datepicker"}
-            selected={dateFrom}
-            onChange={(date) =>
-              dispatch(setStartDateRate(date?.getTime() ?? null))
-            }
-            placeholderText="Введите дату и время"
-            dateFormat="dd.MM.yyyy HH:mm"
-            minDate={new Date()}
-            maxDate={dateTo}
-            timeFormat="HH:mm"
-            filterTime={filterPassedStartTime}
-            showTimeSelect
-            timeIntervals={1}
-            isClearable
-          />
-        </div>
-        <div className="rental__date-to">
-          <label htmlFor="dateTo" className="label">
-            По
-          </label>
-          <DatePicker
-            сlassName={"datepicker"}
-            selected={dateTo}
-            onChange={(date) =>
-              dispatch(setEndDateRate(date?.getTime() ?? null))
-            }
-            placeholderText="Введите дату и время"
-            dateFormat="dd.MM.yyyy HH:mm"
-            minDate={dateFrom ?? new Date()}
-            timeFormat="HH:mm"
-            filterTime={filterPassedEndTime}
-            showTimeSelect
-            timeIntervals={1}
-            isClearable
-          />
-        </div>
+        <Datepicker
+          id={"dateFrom"}
+          textLabel={"С"}
+          selected={dateFrom}
+          onChange={(date) =>
+            dispatch(setStartDateRate(date?.getTime() ?? null))
+          }
+          minDate={new Date()}
+          maxDate={dateTo}
+          filterTime={filterPassedStartTime}
+        />
+        <Datepicker
+          id={"dateTo"}
+          textLabel={"По"}
+          selected={dateTo}
+          onChange={(date) => dispatch(setEndDateRate(date?.getTime() ?? null))}
+          minDate={dateFrom ?? new Date()}
+          filterTime={filterPassedEndTime}
+        />
       </div>
     </div>
   );
