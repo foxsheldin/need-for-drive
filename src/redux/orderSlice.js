@@ -16,7 +16,7 @@ const initialState = {
   selectedPoint: null,
   selectedCategoryCars: { id: "0", name: "Все" },
   selectedCar: null,
-  selectedColor: "Любой",
+  selectedColor: null,
   startDateRate: null,
   endDateRate: null,
   selectedRate: null,
