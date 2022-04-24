@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   setDisabledBreadcrumbs,
   setDisabledOrderButton,
@@ -9,6 +9,8 @@ import "./styles.scss";
 
 const Breadcrumbs = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { stepOrder } = useParams();
   const {
     orderId,
     selectedCity,
@@ -23,6 +25,20 @@ const Breadcrumbs = () => {
   const className = "breadcrumbs__item";
   const isActiveBreadcrumbs = ({ isActive }) =>
     isActive ? className + " breadcrumbs__item_active" : className;
+
+  useEffect(() => {
+    switch (stepOrder) {
+      case "model":
+        if (!selectedCity || !selectedPoint) navigate("/order/point");
+        break;
+      case "additionally":
+        if (!selectedCar) navigate("/order/model");
+        break;
+      case "total":
+        if (!selectedColor || !selectedRate || !startDateRate || !endDateRate)
+          navigate("/order/additionally");
+    }
+  }, [stepOrder]);
 
   const setStepData = (index, argsBool) => {
     dispatch(setDisabledOrderButton({ index: index - 1, value: !argsBool }));
