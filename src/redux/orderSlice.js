@@ -313,9 +313,14 @@ export const orderSlice = createSlice({
     },
     setSelectedCity(state, action) {
       state.selectedCity = action.payload;
+      state.selectedPoint = null;
+      state.selectedColor = null;
+      state.selectedRate = null;
     },
     setSelectedPoint(state, action) {
       state.selectedPoint = action.payload;
+      state.selectedColor = null;
+      state.selectedRate = null;
     },
     setSelectedCategoryCars(state, action) {
       state.selectedCategoryCars = action.payload;
