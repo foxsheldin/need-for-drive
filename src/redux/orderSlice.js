@@ -314,13 +314,27 @@ export const orderSlice = createSlice({
     setSelectedCity(state, action) {
       state.selectedCity = action.payload;
       state.selectedPoint = null;
+      state.selectedCar = null;
+      state.startDateRate = null;
+      state.endDateRate = null;
       state.selectedColor = null;
       state.selectedRate = null;
+      state.totalPrice = null;
+      state.isFullTank.value = false;
+      state.isNeedChildChair.value = false;
+      state.isRightWheel.value = false;
     },
     setSelectedPoint(state, action) {
       state.selectedPoint = action.payload;
+      state.selectedCar = null;
+      state.startDateRate = null;
+      state.endDateRate = null;
       state.selectedColor = null;
       state.selectedRate = null;
+      state.totalPrice = null;
+      state.isFullTank.value = false;
+      state.isNeedChildChair.value = false;
+      state.isRightWheel.value = false;
     },
     setSelectedCategoryCars(state, action) {
       state.selectedCategoryCars = action.payload;
@@ -332,6 +346,9 @@ export const orderSlice = createSlice({
       state.selectedColor = null;
       state.selectedRate = null;
       state.totalPrice = null;
+      state.isFullTank.value = false;
+      state.isNeedChildChair.value = false;
+      state.isRightWheel.value = false;
     },
     setSelectedColor(state, action) {
       state.selectedColor = action.payload;
