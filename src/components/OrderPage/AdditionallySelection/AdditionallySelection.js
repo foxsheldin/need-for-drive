@@ -38,6 +38,8 @@ const AdditionallySelection = () => {
 
   useEffect(() => {
     setRates(ratesData);
+    if (!selectedColor) dispatch(setSelectedColor("Любой"));
+    if (!selectedRate) dispatch(setSelectedRate(ratesData[0]));
   }, [ratesData]);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const AdditionallySelection = () => {
               nameInput={"color"}
               textLabel={color}
               onClick={() => dispatch(setSelectedColor(color))}
-              compare={selectedColor}
+              compare={selectedColor ?? "Любой"}
               key={index}
             />
           ))}
@@ -91,7 +93,9 @@ const AdditionallySelection = () => {
               }
               nameInput={"rate"}
               onClick={() => dispatch(setSelectedRate(rate))}
-              compare={selectedRate?.rateTypeId.unit}
+              compare={
+                selectedRate?.rateTypeId.unit ?? ratesData[0].rateTypeId.unit
+              }
               key={rate.id}
             />
           ))}

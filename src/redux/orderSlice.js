@@ -329,8 +329,8 @@ export const orderSlice = createSlice({
       state.selectedCar = action.payload;
       state.startDateRate = null;
       state.endDateRate = null;
-      state.selectedColor = "Любой";
-      state.selectedRate = state?.ratesData[0];
+      state.selectedColor = null;
+      state.selectedRate = null;
       state.totalPrice = null;
     },
     setSelectedColor(state, action) {
