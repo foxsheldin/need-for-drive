@@ -1,3 +1,22 @@
+# Описание проекта практикума
+
+[Посмотреть проект можно тут](https://foxsheldin.github.io/need-for-drive/)
+
+## Задание:
+
+Необходимо реализовать сайт для компании предоставления услуг каршеринга
+
+## Используемые библиотеки:
+
+Axios - библиотека для выполнения XMLHttpRequests в браузере\
+node-sass - библиотека для работы с препроцессором SASS\
+react-datepicker - библиотека для работы поля input type="text" как type="datetime"\
+ReactRouter - библиотека для маршрутизации\
+Redux Toolkit (react-redux, @reduxjs/toolkit) - библиотека для управления состоянием приложения\
+react-paginate - библиотека для работы с пагинацией\
+react-yandex-maps - библиотека для работы с Яндекс картами\
+Swiper - библиотека для работы со слайдером
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
