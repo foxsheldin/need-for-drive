@@ -7,10 +7,12 @@
   border-left-width: 0;
   border-right-width: 0;
 
-  &.order-container {
+  & .order-container {
     margin-top: 0;
   }
+
   @media (min-width: $tablet-width) {
+    margin-top: 0;
     margin-bottom: 32px;
   }
 

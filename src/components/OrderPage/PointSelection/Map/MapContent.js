@@ -17,17 +17,12 @@ const MapContent = () => {
   );
   const [centerMap, setCenterMap] = useState([54.337458, 48.382399]);
   const [pointZoom, setPointZoom] = useState(9.5);
-  const [mapPoints, setMapPoints] = useState(pointsData);
   const mapRef = useRef();
 
   useEffect(() => {
     dispatch(getCities());
     dispatch(getPoints());
   }, []);
-
-  useEffect(() => {
-    setMapPoints(pointsData);
-  }, [pointsData]);
 
   useEffect(() => {
     if (selectedCity) {
@@ -40,10 +35,8 @@ const MapContent = () => {
     if (selectedPoint) onSelectPoint(selectedPoint.coordinates, 15);
   }, [selectedPoint]);
 
-  const handleClickPlacemark = async (point) => {
-    const cityData = await citiesData.find(
-      (city) => city.name === point.cityId.name
-    );
+  const handleClickPlacemark = (point) => {
+    const cityData = citiesData.find((city) => city.name === point.cityId.name);
     dispatch(setSelectedCity(cityData));
     dispatch(setSelectedPoint(point));
   };
@@ -52,13 +45,13 @@ const MapContent = () => {
     await mapRef.current?.panTo(center, {
       flying: false,
     });
-    await setCenterMap(center);
-    await setPointZoom(zoom);
+    setCenterMap(center);
+    setPointZoom(zoom);
   };
 
   const pins = useMemo(
     () =>
-      mapPoints
+      pointsData
         .filter((point) => point.coordinates)
         .map((point) => {
           return (
@@ -75,7 +68,7 @@ const MapContent = () => {
             />
           );
         }),
-    [mapPoints]
+    [pointsData]
   );
 
   return (

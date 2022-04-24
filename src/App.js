@@ -8,6 +8,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/order/:stepOrder" element={<OrderPage />} />
+        <Route path="/order/confirm/:order" element={<OrderPage />} />
       </Routes>
     </div>
   );

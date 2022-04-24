@@ -35,6 +35,75 @@ export const databaseAPI = {
   getCategories() {
     return instance.get("db/category");
   },
+  getRates() {
+    return instance.get("db/rate");
+  },
+  createOrder(
+    city,
+    point,
+    car,
+    color,
+    dateFrom,
+    dateTo,
+    rate,
+    price,
+    isFullTank,
+    isNeedChildChair,
+    isRightWheel
+  ) {
+    return instance.post("db/order", {
+      orderStatusId: {
+        name: "Подтвержденные",
+        id: "5e26a1f0099b810b946c5d8b",
+      },
+      cityId: { name: city.name, id: city.id },
+      pointId: point.id,
+      carId: car.id,
+      color: color,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+      rateId: rate.id,
+      price: price,
+      isFullTank: isFullTank.value,
+      isNeedChildChair: isNeedChildChair.value,
+      isRightWheel: isRightWheel.value,
+    });
+  },
+  cancelOrder(
+    orderId,
+    city,
+    point,
+    car,
+    color,
+    dateFrom,
+    dateTo,
+    rate,
+    price,
+    isFullTank,
+    isNeedChildChair,
+    isRightWheel
+  ) {
+    return instance.put(`db/order/${orderId}`, {
+      orderStatusId: {
+        name: "Отмененные",
+        id: "5e26a1f5099b810b946c5d8c",
+      },
+      cityId: { name: city.name, id: city.id },
+      pointId: point.id,
+      carId: car.id,
+      color: color,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+      rateId: rate.id,
+      price: price,
+      isFullTank: isFullTank.value,
+      isNeedChildChair: isNeedChildChair.value,
+      isRightWheel: isRightWheel.value,
+    });
+  },
+  getOrder(orderId) {
+    return instance.get(`db/order/${orderId}`);
+  },
 };
 
 export const mapAPI = {

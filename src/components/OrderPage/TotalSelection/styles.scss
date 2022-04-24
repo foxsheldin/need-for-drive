@@ -1,0 +1,52 @@
+@import "../../../scss/variables.scss";
+
+.total {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
+  &__car-info {
+    .order-status {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+      margin-bottom: 16px;
+    }
+
+    .car-name {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    .car-number,
+    .tank,
+    .avalibale {
+      margin-top: 8px;
+    }
+
+    .car-number {
+      border: 1px solid $gray;
+      width: max-content;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+  }
+
+  &__car-image {
+    max-width: 90%;
+    height: auto;
+  }
+
+  @media (min-width: $tablet-width) {
+    position: relative;
+    &__car-image {
+      position: absolute;
+      right: 0;
+      max-width: 50%;
+      z-index: -1;
+      height: max-content;
+    }
+  }
+}

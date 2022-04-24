@@ -1,0 +1,11 @@
+@import "../../../../scss/variables.scss";
+
+.rental {
+  margin-top: 32px;
+
+  &__dates {
+    .date {
+      margin-top: 16px;
+    }
+  }
+}

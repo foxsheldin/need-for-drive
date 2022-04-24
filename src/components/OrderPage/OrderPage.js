@@ -1,35 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { getOrder, resetOrder } from "../../redux/orderSlice";
 import AsideMenu from "../common/AsideMenu/AsideMenu";
 import TopMenu from "../common/TopMenu/TopMenu";
+import AdditionallySelection from "./AdditionallySelection/AdditionallySelection";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
 import ModelSelection from "./ModelSelection/ModelSelection";
 import OrderDetails from "./OrderDetails/OrderDetails";
 import PointSelection from "./PointSelection/PointSelection";
 import "./styles.scss";
+import TotalSelection from "./TotalSelection/TotalSelection";
 
 const OrderPage = () => {
-  const { stepOrder } = useParams();
-  const { stateError } = useSelector((state) => state.order);
+  const { stepOrder, order } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { orderId, stateError } = useSelector((state) => state.order);
   const [currentStep, setCurrentStep] = useState(stepOrder);
+  const regexOrderConfirm = new RegExp("order/confirm", "g");
 
   useEffect(() => {
     setCurrentStep(stepOrder);
   }, [stepOrder]);
 
-  const getCurrentStepContent = () => {
+  useEffect(() => {
+    if (order) {
+      dispatch(getOrder(order));
+    } else if (orderId) {
+      dispatch(resetOrder());
+      navigate("/order/point");
+    }
+  }, [order, orderId]);
+
+  const getCurrentStepContent = React.useMemo(() => {
     switch (currentStep) {
       case "point":
         return <PointSelection />;
       case "model":
         return <ModelSelection />;
+      case "additionally":
+        return <AdditionallySelection />;
+      case "total":
+        return <TotalSelection />;
       default:
-        return null;
+        if (location.pathname.match(regexOrderConfirm))
+          return <TotalSelection />;
+        else return null;
     }
-  };
-
-  const сurrentStepContent = getCurrentStepContent();
+  }, [currentStep]);
 
   return (
     <div className="order-page">
@@ -47,7 +67,9 @@ const OrderPage = () => {
             </div>
             <div className="order-container">
               <div className="order-container__content content main-wrapper">
-                <div className="content__left-side">{сurrentStepContent}</div>
+                <div className="content__left-side">
+                  {getCurrentStepContent}
+                </div>
                 <div className="content__vertical-line" />
                 <div className="content__right-side">
                   <OrderDetails />
