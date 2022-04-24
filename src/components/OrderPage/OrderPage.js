@@ -34,7 +34,7 @@ const OrderPage = () => {
     }
   }, [order, orderId]);
 
-  const getCurrentStepContent = () => {
+  const getCurrentStepContent = React.useMemo(() => {
     switch (currentStep) {
       case "point":
         return <PointSelection />;
@@ -49,12 +49,7 @@ const OrderPage = () => {
           return <TotalSelection />;
         else return null;
     }
-  };
-
-  const сurrentStepContent = React.useMemo(
-    () => getCurrentStepContent(),
-    [currentStep]
-  );
+  }, [currentStep]);
 
   return (
     <div className="order-page">
@@ -72,7 +67,9 @@ const OrderPage = () => {
             </div>
             <div className="order-container">
               <div className="order-container__content content main-wrapper">
-                <div className="content__left-side">{сurrentStepContent}</div>
+                <div className="content__left-side">
+                  {getCurrentStepContent}
+                </div>
                 <div className="content__vertical-line" />
                 <div className="content__right-side">
                   <OrderDetails />
