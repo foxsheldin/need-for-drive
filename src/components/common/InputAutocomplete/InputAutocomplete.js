@@ -65,7 +65,7 @@ const InputAutocomplete = ({
       />
       {displayAutocomplete && (
         <div className="autocomplete">
-          {searchValues.map((item) => {
+          {searchValues?.map((item) => {
             return (
               <div
                 className="autocomplete__item"
