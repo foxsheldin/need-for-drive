@@ -1,6 +1,7 @@
 # Описание проекта практикума
 
-[Посмотреть проект можно тут](https://foxsheldin.github.io/need-for-drive/)
+[Посмотреть проект можно тут](https://foxsheldin.github.io/need-for-drive/)\
+[Панель администратора сайта находится здесь](https://github.com/foxsheldin/nfd-admin)
 
 ## Задание:
 
